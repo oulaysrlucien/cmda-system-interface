@@ -1,0 +1,63 @@
+<div class="container mt-4">
+  <h2>Liste des CmdaMembers</h2>
+  <!--<button routerLink="/add" class="btn btn-primary mb-3">Ajouter un membre</button>  -->
+  <button (click)="goToAddMember()" class="btn btn-primary mb-3">Ajouter un membre</button>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Prénom</th>
+      <th>Nom</th>
+      <th>Email</th>
+      <th>Téléphone</th>
+      <th>Date de Naissance</th>
+      <th>Profession</th>
+      <th>Statut</th>
+      <th>Fraternité</th>
+      <th>Actions</th> <!-- Nouvelle colonne pour les actions -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let member of cmdaMembers">
+      <td>{{ member.id }}</td>
+      <td>{{ member.firstName }}</td>
+      <td>{{ member.lastName }}</td>
+      <td>{{ member.email }}</td>
+      <td>{{ member.phoneNumber }}</td>
+      <td>{{ member.birthday | date: 'yyyy-MM-dd' }}</td>
+      <td>{{ member.profession }}</td>
+      <td>{{ member.status }}</td>
+      <td>{{ member.fraternityName }}</td>
+  <!--
+      <td>
+        <button (click)="openDetailsModal(member)" class="btn btn-info btn-sm">Détails</button>
+        <a [routerLink]="['/edit', member.id]" class="btn btn-warning btn-sm">Edit</a>
+      </td>
+-->
+      <!--
+      <td>
+        <div class="d-flex justify-content-between">
+          <button (click)="openDetailsModal(member)" class="btn btn-info btn-sm me-2">Détails</button>
+          <a [routerLink]="['/edit', member.id]" class="btn btn-warning btn-sm">Edit</a>
+          <button [routerLink]="['/delete', member.id]" class="btn btn-danger">Delete</button>
+        </div>
+      </td>
+-->
+
+      <td>
+        <div class="d-flex">
+          <button (click)="openDetailsModal(member)" class="btn btn-info btn-sm me-2">Détails</button>
+          <a [routerLink]="['/edit', member.id]" class="btn btn-warning btn-sm me-2">Edit</a>
+          <button [routerLink]="['/delete', member.id]" class="btn btn-danger btn-sm">Delete</button>
+        </div>
+      </td>
+
+
+    </tr>
+    </tbody>
+  </table>
+
+
+
+</div>

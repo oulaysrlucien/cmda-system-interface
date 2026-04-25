@@ -1,0 +1,55 @@
+<div class="container">
+  <h2>Gestion des Utilisateurs</h2>
+  <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+    <div class="form-group">
+      <label for="username">Nom d'utilisateur</label>
+      <input type="text" id="username" [(ngModel)]="user.username" name="username" required>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Mot de passe</label>
+      <input type="password" id="password" [(ngModel)]="user.password" name="password" required>
+    </div>
+
+    <div class="form-group">
+      <label for="role">Rôle</label>
+      <select id="role" [(ngModel)]="user.role" name="role" required>
+        <option value="PROVINCIAL">Provincial</option>
+        <option value="REGIONAL">Régional</option>
+        <option value="BERGER">Berger</option>
+        <option value="ADMIN">Admin</option>
+      </select>
+    </div>
+
+    <!--    -->
+    <div class="form-group" *ngIf="user.role === 'PROVINCIAL'">
+      <label for="provinceId">Province</label>
+      <select id="provinceId" [(ngModel)]="user.provinceId" name="provinceId" required>
+        <option *ngFor="let province of provinces" [value]="province.id">{{ province.name }}</option>
+      </select>
+    </div>
+
+    <button type="submit" [disabled]="!userForm.form.valid">Créer Utilisateur</button>
+  </form>
+
+  <h3>Liste des Utilisateurs</h3>
+  <table>
+    <thead>
+    <tr>
+      <th>Nom d'utilisateur</th>
+      <th>Rôle</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.username }}</td>
+      <td>{{ user.role }}</td>
+      <td>
+        <button (click)="editUser(user)">Modifier</button>
+        <button (click)="deleteUser(user.id)">Supprimer</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
