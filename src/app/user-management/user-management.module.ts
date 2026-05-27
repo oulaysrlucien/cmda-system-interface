@@ -6,13 +6,15 @@ import { UserService } from './services/user.service';
 
 import { AdminUserManagementComponent } from './admin-user-management/admin-user-management.component';
 import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
 
 
 
 @NgModule({
   declarations: [
     AdminUserManagementComponent,
-    LoginComponent
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     CommonModule,

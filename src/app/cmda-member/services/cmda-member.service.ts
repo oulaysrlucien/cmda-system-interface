@@ -1,55 +1,83 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 import { CmdaMember } from '../models/cmda-member.model';
-import { HttpHeaders } from '@angular/common/http';
+import { PageResponse } from '../models/page-response.model';
 
-
+export interface MemberSearchParams {
+  fraternityId?: number;
+  regionId?: number;
+  provinceId?: number;
+  firstName?: string;
+  lastName?: string;
+  profession?: string;
+  status?: string;
+  page?: number;
+  size?: number;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class CmdaMemberService {
-  private apiUrl = 'http://localhost:8080/members'; // Base URL du backend
+  private readonly apiUrl = `${environment.apiBaseUrl}/members`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  // Récupérer tous les membres
   getCmdaMembers(): Observable<CmdaMember[]> {
+    return this.getAllMembersForAdmin();
+  }
+
+  getAllMembersForAdmin(): Observable<CmdaMember[]> {
     return this.http.get<CmdaMember[]>(`${this.apiUrl}/all`);
   }
 
-  // Récupérer un membre par son ID
+  getMembersForCurrentUser(page = 0, size = 10): Observable<PageResponse<CmdaMember>> {
+    const params = new HttpParams()
+      .set('page', page)
+      .set('size', size);
+
+    return this.http.get<PageResponse<CmdaMember>>(this.apiUrl, { params });
+  }
+
+  searchMembers(searchParams: MemberSearchParams): Observable<PageResponse<CmdaMember>> {
+    let params = new HttpParams();
+
+    Object.entries(searchParams).forEach(([key, value]) => {
+      if (value !== undefined && value !== null && value !== '') {
+        params = params.set(key, value);
+      }
+    });
+
+    return this.http.get<PageResponse<CmdaMember>>(`${this.apiUrl}/search`, { params });
+  }
+
   getMemberById(id: number): Observable<CmdaMember> {
     return this.http.get<CmdaMember>(`${this.apiUrl}/${id}`);
   }
 
-
-  // Ajouter un membre
   addCmdaMember(member: CmdaMember): Observable<CmdaMember> {
-      return this.http.post<CmdaMember>(this.apiUrl + "/create", member);
+    return this.http.post<CmdaMember>(`${this.apiUrl}/create`, member);
   }
 
-  // Mettre à jour un membre
   updateCmdaMember(member: CmdaMember): Observable<CmdaMember> {
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + localStorage.getItem('token') // Récupérer le token
-    });
-    return this.http.put<CmdaMember>(`${this.apiUrl}/${member.id}`, member, { headers });
+    return this.http.put<CmdaMember>(`${this.apiUrl}/update/${member.id}`, member);
   }
 
+  updateMemberStatus(id: number, status: string): Observable<CmdaMember> {
+    return this.http.patch<CmdaMember>(`${this.apiUrl}/${id}/status`, { status });
+  }
 
+  archiveMember(id: number): Observable<void> {
+    return this.http.patch<void>(`${this.apiUrl}/${id}/archive`, null);
+  }
 
+  restoreMember(id: number): Observable<CmdaMember> {
+    return this.http.patch<CmdaMember>(`${this.apiUrl}/${id}/restore`, null);
+  }
 
-  // Supprimer un membre
-  // src/app/cmda-member/services/cmda-member.service.ts
   deleteCmdaMember(id: number): Observable<void> {
-      const headers = new HttpHeaders({
-          'Authorization': 'Bearer ' + localStorage.getItem('token') // Récupérer le token
-      });
-      return this.http.delete<void>(`${this.apiUrl}/delete/${id}`, { headers });
+    return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
   }
-
-
-
 }

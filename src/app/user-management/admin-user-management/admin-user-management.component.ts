@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UserDTO } from '../models/user.dto';
+import { NotificationService } from '../../shared/services/notification.service';
 import { ProvinceDTO } from '../models/province.dto';
+import { UserCreationDTO } from '../models/user-creation.dto';
+import { UserDTO } from '../models/user.dto';
+import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
-import { AuthService } from '../services/auth.service'; // Assurez-vous que cette ligne est présente
 
 @Component({
   selector: 'app-admin-user-management',
@@ -13,17 +15,13 @@ export class AdminUserManagementComponent implements OnInit {
   users: UserDTO[] = [];
   provinces: ProvinceDTO[] = [];
 
-  user: UserDTO = {
-    id: 0,
-    username: '',
-    role: '',
-    provinceId: undefined,
-    regionId: undefined,
-    fraternityId: undefined,
-    password: ''
-  };
+  user: UserCreationDTO = this.emptyUser();
 
-  constructor(private userService: UserService, private authService: AuthService) {}
+  constructor(
+    private userService: UserService,
+    private authService: AuthService,
+    private notificationService: NotificationService
+  ) {}
 
   ngOnInit(): void {
     this.getUsers();
@@ -36,79 +34,64 @@ export class AdminUserManagementComponent implements OnInit {
     });
   }
 
-/*
   getProvinces(): void {
-    this.userService.getProvinces().subscribe(provinces => {
-      this.provinces = provinces;
-    });
-  }*/
-
-getProvinces(): void {
     this.userService.getProvinces().subscribe(
       provinces => {
-        console.log('Provinces récupérées:', provinces); // Ajoutez ce log pour vérifier
         this.provinces = provinces;
       },
       error => {
         console.error('Erreur lors de la récupération des provinces', error);
+        this.notificationService.showError('Impossible de charger les provinces.');
       }
     );
-}
-
-
-  onSubmit(): void {
-
-      console.log('Rôle sélectionné:', this.user.role);  // Vérifier le rôle sélectionné
-      console.log('ID de la province:', this.user.provinceId); // Vérifier si provinceId est bien renseigné
-      console.log('Nom d\'utilisateur:', this.user.username); // Vérifier si le nom d'utilisateur est renseigné
-
-      // Vérifier que username et password ne sont pas undefined
-      if (!this.user.username || !this.user.password) {
-          alert('Veuillez remplir le nom d\'utilisateur et le mot de passe.');
-          return; // Ne pas procéder si les champs sont vides
-      }
-
-      if (!this.authService.isAuthenticated()) {
-          // Authentification de l'utilisateur
-          this.authService.authenticate(this.user.username, this.user.password).subscribe(
-              (response: { token: string }) => {
-                  this.authService.saveToken(response.token); // Sauvegarder le token
-                  this.createUser(); // Appeler la méthode pour créer l'utilisateur
-              },
-              (error: any) => {
-                  console.error('Erreur d\'authentification', error);
-                  alert('Échec de l\'authentification. Veuillez vérifier vos identifiants.');
-              }
-          );
-      } else {
-          this.createUser(); // Si déjà authentifié, créer directement l'utilisateur
-      }
   }
 
+  onSubmit(): void {
+    if (!this.user.username || !this.user.password) {
+      this.notificationService.showWarning('Veuillez remplir le nom d\'utilisateur et le mot de passe.');
+      return;
+    }
+
+    if (!this.authService.isAuthenticated()) {
+      this.notificationService.showWarning('Vous devez être connecté en tant qu\'administrateur pour créer un utilisateur.');
+      return;
+    }
+
+    this.createUser();
+  }
 
   createUser(): void {
-    console.log('Création de l\'utilisateur avec les données :', this.user);  // Log des données avant l'envoi
     this.userService.createUser(this.user).subscribe(
-      response => {
-        console.log('Utilisateur créé', response);
+      () => {
         this.getUsers();
-        this.user = { id: 0, username: '', password: '', role: '', provinceId: undefined }; // Réinitialiser le formulaire
+        this.user = this.emptyUser();
+        this.notificationService.showSuccess('Utilisateur créé avec succès.');
       },
       error => {
         console.error('Erreur lors de la création de l\'utilisateur', error);
-        alert('Une erreur est survenue lors de la création de l\'utilisateur.');
+        this.notificationService.showError('Une erreur est survenue lors de la création de l\'utilisateur.');
       }
     );
   }
 
   editUser(user: UserDTO): void {
-    // Implémentez la logique pour modifier un utilisateur
   }
 
   deleteUser(userId: number): void {
     this.userService.deleteUser(userId).subscribe(() => {
-      console.log('Utilisateur supprimé');
       this.getUsers();
+      this.notificationService.showSuccess('Utilisateur supprimé avec succès.');
     });
+  }
+
+  private emptyUser(): UserCreationDTO {
+    return {
+      username: '',
+      password: '',
+      role: '',
+      provinceId: undefined,
+      regionId: undefined,
+      fraternityId: undefined
+    };
   }
 }

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { CmdaMemberService } from '../services/cmda-member.service';
-import { CmdaMember } from '../models/cmda-member.model';
 import { Router } from '@angular/router';
+import { NotificationService } from '../../shared/services/notification.service';
+import { CmdaMember } from '../models/cmda-member.model';
+import { CmdaMemberService } from '../services/cmda-member.service';
 
 @Component({
   selector: 'app-add',
@@ -17,31 +18,31 @@ export class AddComponent {
     phoneNumber: '',
     birthday: '',
     profession: '',
-    status: 'ACTIVE', // Valeur par défaut
+    status: 'ACTIVE',
     fraternityId: undefined,
     fraternityName: undefined
   };
 
-  constructor(private cmdaMemberService: CmdaMemberService, private router: Router) { }
+  constructor(
+    private cmdaMemberService: CmdaMemberService,
+    private notificationService: NotificationService,
+    private router: Router
+  ) {}
 
   onSubmit(): void {
-    console.log('Formulaire soumis', this.newMember); // Log pour vérifier les données
     this.cmdaMemberService.addCmdaMember(this.newMember).subscribe(
-      response => {
-        console.log('Membre ajouté avec succès', response);
+      () => {
+        this.notificationService.showSuccess('Membre ajouté avec succès.');
         this.router.navigate(['/cmdaMembers']);
       },
       error => {
         console.error('Erreur lors de l\'ajout du membre', error);
+        this.notificationService.showError('Une erreur est survenue lors de l\'ajout du membre.');
       }
     );
   }
 
-
   onCancel(): void {
-    this.router.navigate(['/cmdaMembers']); // Redirigez vers la liste des membres
+    this.router.navigate(['/cmdaMembers']);
   }
-
-
-
 }

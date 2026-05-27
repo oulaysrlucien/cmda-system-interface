@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +10,8 @@ import { CmdaMemberModule } from './cmda-member/cmda-member.module'; // Import d
 import { UserManagementModule } from './user-management/user-management.module'; // Import du module UserManagementModule
 
 import { WelcomeComponent } from './welcome/welcome.component';
+import { AuthInterceptor } from './user-management/interceptors/auth.interceptor';
+import { HttpErrorInterceptor } from './shared/interceptors/http-error.interceptor';
 
 
 @NgModule({
@@ -25,7 +27,18 @@ import { WelcomeComponent } from './welcome/welcome.component';
     CmdaMemberModule, // Ajout du module cmda-member
     UserManagementModule // Ajout du module UserManagementModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

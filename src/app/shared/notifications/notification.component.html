@@ -1,0 +1,16 @@
+<div class="notification-stack" *ngIf="messages$ | async as messages">
+  <div
+    *ngFor="let message of messages; trackBy: trackByMessageId"
+    class="alert alert-dismissible fade show"
+    [ngClass]="'alert-' + message.type"
+    role="alert"
+  >
+    <span>{{ message.message }}</span>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Fermer"
+      (click)="dismiss(message.id)"
+    ></button>
+  </div>
+</div>

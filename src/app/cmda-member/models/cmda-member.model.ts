@@ -1,4 +1,3 @@
-// src/app/cmda-member/models/cmda-member.model.ts
 export interface CmdaMember {
   id: number;
   firstName: string;
@@ -10,4 +9,8 @@ export interface CmdaMember {
   status: string;
   fraternityId?: number;
   fraternityName?: string;
+  regionId?: number;
+  regionName?: string;
+  provinceId?: number;
+  provinceName?: string;
 }

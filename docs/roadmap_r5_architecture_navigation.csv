@@ -1,0 +1,10 @@
+ID;Titre;Objectif;Actions principales;Livrable;Priorite
+R5-E1;Audit navigation et composants actuels;Comprendre les routes et composants existants;Auditer AppRoutingModule Sidebar Welcome Login List Details;Diagnostic navigation;1
+R5-E2;Architecture des layouts Angular;Separer public et connecte;Creer PublicLayout AuthenticatedLayout restructurer routes;Layouts et routes clarifies;1
+R5-E3;Accueil public selon template;Reproduire la page d'accueil partagee;Hero public regions graces footer navigation publique;Accueil public responsive;1
+R5-E4;Header et sidebar connectes;Construire la navigation de travail;Header profil sidebar role mobile drawer etats actifs;Navigation connectee responsive;2
+R5-E5;Espaces utilisateurs par role;Adapter les vues aux responsabilites;Dashboards ADMIN PROVINCIAL REGIONAL BERGER menus filtres;Espaces utilisateurs coherents;2
+R5-E6;Liste membres responsive;Rendre les listes lisibles;Limiter colonnes cartes mobile filtres pagination actions;Liste membres claire avec bouton Details;2
+R5-E7;Page fiche details membre;Remplacer la modal par une fiche complete;Route details fiche paysage sections photo actions;Fiche renseignement structuree;3
+R5-E8;Photo membre et API;Prevoir l'affichage photo;Ajouter photoUrl modele front DTO API placeholder;Photo membre compatible;3
+R5-E9;Verification responsive;Valider l'experience finale;Tester desktop tablette mobile accessibilite build;R5 verifiee;3
