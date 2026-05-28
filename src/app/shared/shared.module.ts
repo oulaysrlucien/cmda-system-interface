@@ -6,6 +6,15 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { UnauthorizedComponent } from './errors/unauthorized/unauthorized.component';
 import { NotificationComponent } from './notifications/notification.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { AuthenticatedLayoutComponent } from './layouts/authenticated-layout/authenticated-layout.component';
+import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
+import { PublicHeaderComponent } from './header/public-header/public-header.component';
+import { AppHeaderComponent } from './header/app-header/app-header.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { PublicPageComponent } from './public-page/public-page.component';
+import { RoleDashboardComponent } from './role-dashboard/role-dashboard.component';
+import { PersonalSpaceComponent } from './personal-space/personal-space.component';
+import { HierarchySpaceComponent } from './hierarchy-space/hierarchy-space.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +22,16 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     UnauthorizedComponent,
     ForbiddenComponent,
     NotFoundComponent,
-    NotificationComponent
+    NotificationComponent,
+    PublicLayoutComponent,
+    AuthenticatedLayoutComponent,
+    PublicHeaderComponent,
+    AppHeaderComponent,
+    DashboardComponent,
+    PublicPageComponent,
+    RoleDashboardComponent,
+    PersonalSpaceComponent,
+    HierarchySpaceComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +42,16 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     UnauthorizedComponent,
     ForbiddenComponent,
     NotFoundComponent,
-    NotificationComponent
+    NotificationComponent,
+    PublicLayoutComponent,
+    AuthenticatedLayoutComponent,
+    PublicHeaderComponent,
+    AppHeaderComponent,
+    DashboardComponent,
+    PublicPageComponent,
+    RoleDashboardComponent,
+    PersonalSpaceComponent,
+    HierarchySpaceComponent
   ]
 })
 export class SharedModule { }

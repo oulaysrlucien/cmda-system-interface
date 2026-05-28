@@ -1,0 +1,33 @@
+<header class="app-header">
+  <button type="button" class="app-header__menu" aria-label="Ouvrir le menu" (click)="menuToggle.emit()">
+    <i class="bi bi-list"></i>
+  </button>
+
+  <div class="app-header__title">
+    <strong>{{ pageTitle }}</strong>
+    <span>{{ pageSubtitle }}</span>
+  </div>
+
+  <div class="app-header__profile" [class.is-open]="profileMenuOpen">
+    <button type="button" class="app-header__profile-button" (click)="toggleProfileMenu()">
+      <i class="bi bi-person-circle"></i>
+      <span>{{ username }}</span>
+      <i class="bi bi-chevron-down"></i>
+    </button>
+
+    <div class="app-header__profile-menu" *ngIf="profileMenuOpen">
+      <a routerLink="/app/personal-space" (click)="closeProfileMenu()">
+        <i class="bi bi-house-door"></i>
+        <span>Espace personnel</span>
+      </a>
+      <a routerLink="/app/account" (click)="closeProfileMenu()">
+        <i class="bi bi-gear"></i>
+        <span>Mon compte</span>
+      </a>
+      <button type="button" (click)="logout()">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Me deconnecter</span>
+      </button>
+    </div>
+  </div>
+</header>

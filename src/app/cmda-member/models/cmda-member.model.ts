@@ -13,4 +13,5 @@ export interface CmdaMember {
   regionName?: string;
   provinceId?: number;
   provinceName?: string;
+  photoUrl?: string;
 }

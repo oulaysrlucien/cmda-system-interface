@@ -1,0 +1,32 @@
+.personal-space {
+  background: #fff;
+  border: 1px solid rgba(31, 22, 61, 0.1);
+  border-radius: 8px;
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.personal-space > p:first-child {
+  color: #e49400;
+  font-weight: 900;
+  margin: 0 0 0.35rem;
+  text-transform: uppercase;
+}
+
+.personal-space h1 {
+  color: #210a55;
+  margin: 0 0 0.75rem;
+}
+
+.personal-space span {
+  background: #eee7f5;
+  border-radius: 999px;
+  color: #210a55;
+  display: inline-flex;
+  font-weight: 800;
+  padding: 0.45rem 0.7rem;
+}
+
+.personal-space__note {
+  color: #5f547a;
+  margin: 1rem 0 0;
+}

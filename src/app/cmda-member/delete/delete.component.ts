@@ -26,7 +26,7 @@ export class DeleteComponent implements OnInit {
     this.cmdaMemberService.deleteCmdaMember(this.memberId).subscribe(
       () => {
         this.notificationService.showSuccess('Membre supprimé avec succès.');
-        this.router.navigate(['/cmdaMembers']);
+        this.router.navigate(['/app/members']);
       },
       error => {
         console.error('Erreur lors de la suppression du membre', error);
@@ -36,6 +36,6 @@ export class DeleteComponent implements OnInit {
   }
 
   cancel(): void {
-    this.router.navigate(['/cmdaMembers']);
+    this.router.navigate(['/app/members']);
   }
 }

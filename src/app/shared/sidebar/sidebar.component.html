@@ -1,24 +1,58 @@
-<nav class="bg-light border-end" id="sidebar" style="width: 250px; min-height: 100vh;">
-  <div class="p-4">
-    <h4>Navigation</h4>
-    <ul class="nav flex-column">
-      <li class="nav-item" *ngIf="showMembersMenu()">
-        <a class="nav-link d-flex align-items-center" routerLink="/cmdaMembers">
-          <i class="bi bi-list-ul me-2"></i> Liste des membres
+<nav class="sidebar" aria-label="Navigation connectee">
+  <a class="sidebar__brand" [routerLink]="dashboardRoute" (click)="navigate.emit()">
+    <img src="assets/home/cmda-logo.svg" alt="Logo CMDA DEV">
+    <span>
+      <strong>CMDA DEV</strong>
+      <small>{{ scopeLabel }}</small>
+    </span>
+  </a>
+
+  <div class="sidebar__section">
+    <p class="sidebar__section-title">Principal</p>
+    <ul class="sidebar__nav">
+      <li>
+        <a [routerLink]="dashboardRoute" routerLinkActive="is-active" (click)="navigate.emit()">
+          <i class="bi bi-speedometer2"></i>
+          <span>{{ primarySpaceLabel }}</span>
         </a>
       </li>
 
-      <li class="nav-item" *ngIf="showUserManagementMenu()">
-        <a class="nav-link d-flex align-items-center" routerLink="/user-management">
-          <i class="bi bi-person-fill me-2"></i> Gestion des utilisateurs
+      <li *ngIf="showMembersMenu()">
+        <a routerLink="/app/members" routerLinkActive="is-active" (click)="navigate.emit()">
+          <i class="bi bi-people"></i>
+          <span>Membres</span>
         </a>
       </li>
 
-      <li class="nav-item" *ngIf="isAuthenticated()">
-        <a class="nav-link d-flex align-items-center text-danger" routerLink="/logout">
-          <i class="bi bi-box-arrow-right me-2"></i> Déconnexion
+      <li *ngIf="showUserManagementMenu()">
+        <a routerLink="/app/users" routerLinkActive="is-active" (click)="navigate.emit()">
+          <i class="bi bi-person-gear"></i>
+          <span>Utilisateurs</span>
         </a>
       </li>
     </ul>
   </div>
+
+  <div class="sidebar__section" *ngIf="showStructureMenu() || showFraternityMenu()">
+    <p class="sidebar__section-title">Perimetre</p>
+    <ul class="sidebar__nav">
+      <li *ngIf="showStructureMenu()">
+        <span class="sidebar__item sidebar__item--disabled">
+          <i class="bi bi-diagram-3"></i>
+          <span>Structures</span>
+        </span>
+      </li>
+      <li *ngIf="showFraternityMenu()">
+        <span class="sidebar__item sidebar__item--disabled">
+          <i class="bi bi-house-heart"></i>
+          <span>Fraternites</span>
+        </span>
+      </li>
+    </ul>
+  </div>
+
+  <button type="button" class="sidebar__logout" (click)="logout()">
+    <i class="bi bi-box-arrow-right"></i>
+    <span>Deconnexion</span>
+  </button>
 </nav>

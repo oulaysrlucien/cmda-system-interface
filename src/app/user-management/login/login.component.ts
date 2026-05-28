@@ -11,6 +11,7 @@ import { AuthService } from '../services/auth.service';
 export class LoginComponent {
   username = '';
   password = '';
+  showPassword = false;
 
   constructor(
     private authService: AuthService,
@@ -36,5 +37,9 @@ export class LoginComponent {
         this.notificationService.showError('Échec de l\'authentification. Veuillez vérifier vos identifiants.');
       }
     );
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
   }
 }

@@ -1,0 +1,23 @@
+<header class="public-header" [class.public-header--home]="isHomePage">
+  <a class="public-header__brand" routerLink="/">
+    <img class="public-header__mark" src="assets/home/cmda-logo.svg" alt="Logo CMDA DEV">
+    <span>
+      <strong>CMDA DEV</strong>
+      <em>Communaute Catholique Mere du Divin Amour</em>
+      <small>Province Europe</small>
+    </span>
+  </a>
+
+  <nav class="public-header__nav" aria-label="Navigation publique">
+    <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }">Accueil</a>
+    <a routerLink="/" fragment="features">Fonctionnalites</a>
+    <a routerLink="/about" routerLinkActive="is-active">A propos</a>
+    <a routerLink="/resources" routerLinkActive="is-active">Ressources</a>
+    <a routerLink="/contact" routerLinkActive="is-active">Contact</a>
+  </nav>
+
+  <a class="public-header__login" routerLink="/login">
+    <i class="bi bi-person-fill"></i>
+    <span>Se connecter</span>
+  </a>
+</header>

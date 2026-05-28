@@ -98,11 +98,19 @@ export class AuthService {
 
   getDefaultRouteForCurrentUser(): string {
     if (this.hasRole('ADMIN')) {
-      return '/user-management';
+      return '/app/admin/dashboard';
     }
 
-    if (this.hasRole('PROVINCIAL') || this.hasRole('REGIONAL') || this.hasRole('BERGER')) {
-      return '/cmdaMembers';
+    if (this.hasRole('PROVINCIAL')) {
+      return '/app/provincial/province';
+    }
+
+    if (this.hasRole('REGIONAL')) {
+      return '/app/regional/region';
+    }
+
+    if (this.hasRole('BERGER')) {
+      return '/app/berger/fraternity';
     }
 
     return '/';

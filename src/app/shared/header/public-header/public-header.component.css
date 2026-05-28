@@ -1,0 +1,118 @@
+.public-header {
+  align-items: center;
+  background: rgba(255, 253, 249, 0.94);
+  display: flex;
+  gap: 1.5rem;
+  justify-content: space-between;
+  padding: 0.85rem clamp(1rem, 4vw, 4rem);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.public-header__brand {
+  align-items: center;
+  color: #210a55;
+  display: inline-flex;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.public-header__mark {
+  height: 4.2rem;
+  width: 3.55rem;
+}
+
+.public-header__brand strong,
+.public-header__brand em,
+.public-header__brand small {
+  display: block;
+}
+
+.public-header__brand strong {
+  font-size: 1.45rem;
+  line-height: 1;
+}
+
+.public-header__brand em {
+  color: #e49400;
+  font-size: 0.72rem;
+  font-style: normal;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.public-header__brand small {
+  color: #210a55;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.15rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.public-header__nav {
+  align-items: center;
+  display: flex;
+  gap: clamp(0.75rem, 2vw, 2rem);
+}
+
+.public-header__nav a {
+  color: #210a55;
+  font-weight: 700;
+  padding: 0.5rem 0;
+  text-decoration: none;
+}
+
+.public-header__nav a.is-active {
+  color: #e49400;
+}
+
+.public-header__login {
+  align-items: center;
+  background: #210a55;
+  border-radius: 10px;
+  color: #fff;
+  display: inline-flex;
+  font-weight: 700;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+}
+
+@media (max-width: 820px) {
+  .public-header {
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+  }
+
+  .public-header__nav {
+    flex: 1 0 auto;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+    order: 2;
+  }
+
+  .public-header__login {
+    margin-left: auto;
+    order: 1;
+    padding: 0.65rem 0.9rem;
+  }
+
+  .public-header--home .public-header__nav {
+    flex-basis: 100%;
+    margin-left: 0;
+  }
+
+  .public-header__brand strong {
+    font-size: 1.15rem;
+  }
+
+  .public-header__brand em {
+    font-size: 0.58rem;
+  }
+
+  .public-header__brand small {
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,25 @@
+.dashboard {
+  background: #fff;
+  border: 1px solid rgba(31, 22, 61, 0.1);
+  border-radius: 8px;
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+.dashboard__eyebrow {
+  color: #e49400;
+  font-size: 0.8rem;
+  font-weight: 800;
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+}
+
+.dashboard h1 {
+  color: #210a55;
+  margin-bottom: 0.75rem;
+}
+
+.dashboard p {
+  color: #5f547a;
+  margin: 0;
+  max-width: 48rem;
+}

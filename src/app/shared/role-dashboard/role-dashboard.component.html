@@ -1,0 +1,30 @@
+<section class="role-dashboard">
+  <div class="role-dashboard__hero">
+    <div>
+      <p>{{ eyebrow }}</p>
+      <h1>{{ title }}</h1>
+      <span>{{ scope }}</span>
+    </div>
+    <p>{{ description }}</p>
+  </div>
+
+  <div class="role-dashboard__stats">
+    <article *ngFor="let stat of stats">
+      <span><i class="bi" [ngClass]="stat.icon"></i></span>
+      <div>
+        <strong>{{ stat.value }}</strong>
+        <p>{{ stat.label }}</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="role-dashboard__actions">
+    <h2>Actions rapides</h2>
+    <div>
+      <a *ngFor="let action of actions" [routerLink]="action.route">
+        <i class="bi" [ngClass]="action.icon"></i>
+        <span>{{ action.label }}</span>
+      </a>
+    </div>
+  </div>
+</section>

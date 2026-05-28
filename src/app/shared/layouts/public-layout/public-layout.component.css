@@ -1,0 +1,74 @@
+.public-layout {
+  min-height: 100vh;
+  background: #fffdf9;
+  color: #1e0b4f;
+  display: flex;
+  flex-direction: column;
+}
+
+.public-main {
+  flex: 1;
+}
+
+.public-footer {
+  align-items: center;
+  border-top: 1px solid rgba(30, 11, 79, 0.1);
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 1rem clamp(1rem, 4vw, 4rem) 1.25rem;
+}
+
+.public-footer__brand {
+  align-items: center;
+  display: flex;
+  gap: 0.6rem;
+}
+
+.public-footer__brand img {
+  height: 2.5rem;
+  width: 2.15rem;
+}
+
+.public-footer__brand strong,
+.public-footer__brand small {
+  display: block;
+}
+
+.public-footer__brand small {
+  color: #5f547a;
+  font-size: 0.875rem;
+}
+
+.public-footer__motto {
+  color: #210a55;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.1rem, 2vw, 1.75rem);
+  font-style: italic;
+  margin: 0;
+}
+
+.public-footer__links {
+  align-items: center;
+  display: flex;
+  gap: 0.65rem;
+}
+
+.public-footer__links a {
+  align-items: center;
+  background: #210a55;
+  border-radius: 999px;
+  color: #fff;
+  display: inline-flex;
+  height: 2.25rem;
+  justify-content: center;
+  text-decoration: none;
+  width: 2.25rem;
+}
+
+@media (max-width: 700px) {
+  .public-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

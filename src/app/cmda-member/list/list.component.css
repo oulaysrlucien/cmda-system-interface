@@ -1,0 +1,256 @@
+.member-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.member-list__hero,
+.member-list__panel {
+  background: #fff;
+  border: 1px solid rgba(31, 22, 61, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 1rem 2.5rem rgba(33, 10, 85, 0.06);
+}
+
+.member-list__hero {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 1.25rem;
+}
+
+.member-list__hero p {
+  color: #e49400;
+  font-size: 0.78rem;
+  font-weight: 900;
+  margin: 0 0 0.25rem;
+  text-transform: uppercase;
+}
+
+.member-list__hero h1 {
+  color: #210a55;
+  font-family: Georgia, 'Times New Roman', serif;
+  margin: 0;
+}
+
+.member-list__hero span {
+  color: #5f547a;
+}
+
+.member-list__hero button,
+.member-list__filters button,
+.member-actions button,
+.member-actions a {
+  align-items: center;
+  border-radius: 8px;
+  display: inline-flex;
+  font-weight: 800;
+  gap: 0.5rem;
+  justify-content: center;
+  min-height: 2.6rem;
+  padding: 0.65rem 0.9rem;
+  text-decoration: none;
+}
+
+.member-list__hero button,
+.member-actions button {
+  background: #210a55;
+  border: 0;
+  color: #fff;
+}
+
+.member-list__panel {
+  padding: 1.25rem;
+}
+
+.member-list__filters {
+  align-items: end;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: minmax(14rem, 1fr) minmax(12rem, 0.35fr) auto;
+  margin-bottom: 1rem;
+}
+
+.member-list__filters label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.member-list__filters span {
+  color: #210a55;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.member-list__filters input,
+.member-list__filters select {
+  border: 1px solid rgba(31, 22, 61, 0.18);
+  border-radius: 8px;
+  min-height: 2.8rem;
+  padding: 0.65rem 0.8rem;
+}
+
+.member-list__filters button,
+.member-actions a {
+  background: #fff;
+  border: 1px solid rgba(31, 22, 61, 0.18);
+  color: #210a55;
+}
+
+.member-table {
+  overflow-x: auto;
+}
+
+.member-table table {
+  border-collapse: collapse;
+  min-width: 54rem;
+  width: 100%;
+}
+
+.member-table th,
+.member-table td {
+  border-bottom: 1px solid rgba(31, 22, 61, 0.08);
+  color: #210a55;
+  padding: 0.85rem;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.member-table th {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.member-cell,
+.member-card__top {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.member-avatar {
+  align-items: center;
+  background: #f8e9c7;
+  border-radius: 999px;
+  color: #210a55;
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-weight: 900;
+  height: 2.6rem;
+  justify-content: center;
+  width: 2.6rem;
+}
+
+.member-table strong,
+.member-table small {
+  display: block;
+}
+
+.member-table small {
+  color: #5f547a;
+}
+
+.member-status {
+  border-radius: 999px;
+  display: inline-flex;
+  font-size: 0.78rem;
+  font-weight: 900;
+  padding: 0.35rem 0.65rem;
+}
+
+.member-status.is-active {
+  background: #ddf8e6;
+  color: #137333;
+}
+
+.member-status.is-inactive {
+  background: #fee2e2;
+  color: #b42318;
+}
+
+.member-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.member-cards {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .member-list__hero {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .member-list__filters {
+    grid-template-columns: 1fr;
+  }
+
+  .member-table {
+    display: none;
+  }
+
+  .member-cards {
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .member-cards article {
+    border: 1px solid rgba(31, 22, 61, 0.1);
+    border-radius: 8px;
+    padding: 1rem;
+  }
+
+  .member-card__top {
+    align-items: flex-start;
+  }
+
+  .member-card__top h2 {
+    color: #210a55;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.25rem;
+    margin: 0;
+  }
+
+  .member-card__top p {
+    color: #5f547a;
+    margin: 0.2rem 0 0;
+  }
+
+  .member-card__top .member-status {
+    margin-left: auto;
+  }
+
+  .member-cards dl {
+    display: grid;
+    gap: 0.65rem;
+    grid-template-columns: 1fr 1fr;
+    margin: 1rem 0;
+  }
+
+  .member-cards dt {
+    color: #5f547a;
+    font-size: 0.75rem;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .member-cards dd {
+    color: #210a55;
+    margin: 0;
+  }
+
+  .member-actions a,
+  .member-actions button {
+    flex: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .member-cards dl {
+    grid-template-columns: 1fr;
+  }
+}

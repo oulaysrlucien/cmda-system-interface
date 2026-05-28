@@ -1,0 +1,26 @@
+.public-page {
+  margin: 0 auto;
+  max-width: 72rem;
+  padding: clamp(2rem, 6vw, 5rem) clamp(1rem, 4vw, 4rem);
+}
+
+.public-page__eyebrow {
+  color: #e49400;
+  font-size: 0.8rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.public-page h1 {
+  color: #210a55;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.public-page p {
+  color: #5f547a;
+  font-size: 1.05rem;
+  max-width: 42rem;
+}

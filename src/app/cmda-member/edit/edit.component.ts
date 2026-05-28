@@ -47,7 +47,7 @@ export class EditComponent implements OnInit {
     this.cmdaMemberService.updateCmdaMember(this.member).subscribe(
       () => {
         this.notificationService.showSuccess('Membre mis à jour avec succès.');
-        this.router.navigate(['/cmdaMembers']);
+        this.router.navigate(['/app/members']);
       },
       error => {
         console.error('Erreur lors de la mise à jour du membre', error);
@@ -57,6 +57,6 @@ export class EditComponent implements OnInit {
   }
 
   onCancel(): void {
-    this.router.navigate(['/cmdaMembers']);
+    this.router.navigate(['/app/members']);
   }
 }

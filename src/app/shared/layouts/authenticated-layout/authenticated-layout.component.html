@@ -1,0 +1,18 @@
+<div class="app-shell" [class.app-shell--menu-open]="sidebarOpen">
+  <app-sidebar class="app-shell__sidebar" (navigate)="closeSidebar()"></app-sidebar>
+
+  <div class="app-shell__workspace">
+    <app-app-header (menuToggle)="toggleSidebar()"></app-app-header>
+
+    <main class="app-shell__content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+  <button
+    type="button"
+    class="app-shell__backdrop"
+    aria-label="Fermer le menu"
+    (click)="closeSidebar()"
+  ></button>
+</div>

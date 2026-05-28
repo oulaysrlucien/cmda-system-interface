@@ -1,0 +1,119 @@
+.app-header {
+  align-items: center;
+  background: #fff;
+  border-bottom: 1px solid rgba(31, 22, 61, 0.1);
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  min-height: 4.75rem;
+  padding: 0.85rem 1.25rem;
+  position: sticky;
+  top: 0;
+  z-index: 15;
+}
+
+.app-header__menu {
+  align-items: center;
+  background: #f1eaf8;
+  border: 0;
+  border-radius: 8px;
+  color: #210a55;
+  display: none;
+  font-size: 1.5rem;
+  height: 2.5rem;
+  justify-content: center;
+  width: 2.5rem;
+}
+
+.app-header__title {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.app-header__title strong {
+  color: #210a55;
+  font-size: 1.2rem;
+}
+
+.app-header__title span {
+  color: #776d8d;
+  font-size: 0.875rem;
+}
+
+.app-header__profile {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+  position: relative;
+}
+
+.app-header__profile-button {
+  align-items: center;
+  background: #2b2b31;
+  border: 2px solid #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 0 2px #2b2b31;
+  color: #fff;
+  display: inline-flex;
+  font-weight: 700;
+  gap: 0.5rem;
+  min-height: 2.8rem;
+  padding: 0.55rem 0.75rem;
+}
+
+.app-header__profile-menu {
+  background: #fff;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 1rem 2rem rgba(18, 8, 45, 0.16);
+  min-width: 14rem;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.65rem);
+  z-index: 30;
+}
+
+.app-header__profile-menu a,
+.app-header__profile-menu button {
+  align-items: center;
+  background: #fff;
+  border: 0;
+  color: #2b2b31;
+  display: flex;
+  font: inherit;
+  gap: 0.75rem;
+  min-height: 3.2rem;
+  padding: 0.8rem 1rem;
+  text-align: left;
+  text-decoration: none;
+  width: 100%;
+}
+
+.app-header__profile-menu a:hover,
+.app-header__profile-menu button:hover {
+  background: #f2f1f6;
+}
+
+@media (max-width: 900px) {
+  .app-header__menu {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 620px) {
+  .app-header {
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .app-header__title {
+    flex: 1;
+  }
+
+  .app-header__profile {
+    justify-content: space-between;
+    width: 100%;
+  }
+}

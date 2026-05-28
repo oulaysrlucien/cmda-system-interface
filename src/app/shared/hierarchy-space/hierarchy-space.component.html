@@ -1,0 +1,93 @@
+<section class="hierarchy-space" [class]="'hierarchy-space hierarchy-space--' + mode">
+  <div class="hierarchy-hero">
+    <img [src]="heroImage" [alt]="title">
+    <div class="hierarchy-hero__content">
+      <span class="hierarchy-hero__icon">
+        <i class="bi" [ngClass]="mode === 'province' ? 'bi-cross' : mode === 'region' ? 'bi-geo-alt-fill' : 'bi-house-heart'"></i>
+      </span>
+      <p>{{ eyebrow }}</p>
+      <h1>{{ title }}</h1>
+      <strong>{{ subtitle }}</strong>
+      <blockquote>Que tous soient un, comme toi, Pere, tu es en moi, et moi en toi.</blockquote>
+      <cite>Jean 17,21</cite>
+    </div>
+    <aside class="hierarchy-hero__manager">
+      <span><i class="bi bi-person-circle"></i></span>
+      <div>
+        <p>{{ managerTitle }}</p>
+        <strong>{{ managerName }}</strong>
+        <small>+33 6 12 34 56 78</small>
+        <small>contact&#64;cmda.eu</small>
+      </div>
+    </aside>
+  </div>
+
+  <div class="hierarchy-metrics">
+    <article *ngFor="let metric of metrics">
+      <span><i class="bi" [ngClass]="metric.icon"></i></span>
+      <div>
+        <strong>{{ metric.value }}</strong>
+        <p>{{ metric.label }}</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="hierarchy-layout">
+    <main class="hierarchy-main">
+      <div class="hierarchy-main__header">
+        <div>
+          <h2>{{ collectionTitle }}</h2>
+          <p>{{ collectionSubtitle }}</p>
+        </div>
+        <button type="button">
+          <i class="bi bi-plus"></i>
+          <span>{{ addLabel }}</span>
+        </button>
+      </div>
+
+      <div class="hierarchy-cards">
+        <article class="hierarchy-card" *ngFor="let item of items">
+          <div class="hierarchy-card__media">
+            <img [src]="item.image" [alt]="item.name">
+            <button type="button" aria-label="Options"><i class="bi bi-three-dots-vertical"></i></button>
+          </div>
+          <div class="hierarchy-card__body">
+            <h3>{{ item.name }}</h3>
+            <p>{{ item.location }}</p>
+            <span>{{ item.description }}</span>
+            <ul>
+              <li *ngFor="let metric of item.metrics">{{ metric }}</li>
+            </ul>
+            <a [routerLink]="item.route">
+              Voir <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </article>
+      </div>
+    </main>
+
+    <aside class="hierarchy-side">
+      <section>
+        <h2>Prochains evenements</h2>
+        <article *ngFor="let event of events">
+          <strong>{{ event.date }}</strong>
+          <div>
+            <p>{{ event.title }}</p>
+            <span>{{ event.subtitle }}</span>
+          </div>
+        </article>
+      </section>
+
+      <section>
+        <h2>Documents recents</h2>
+        <article *ngFor="let document of documents">
+          <strong><i class="bi bi-file-earmark-text"></i></strong>
+          <div>
+            <p>{{ document.title }}</p>
+            <span>{{ document.subtitle }}</span>
+          </div>
+        </article>
+      </section>
+    </aside>
+  </div>
+</section>

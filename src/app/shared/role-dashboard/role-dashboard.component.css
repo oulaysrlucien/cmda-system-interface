@@ -1,0 +1,139 @@
+.role-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.role-dashboard__hero {
+  background: #fff;
+  border: 1px solid rgba(31, 22, 61, 0.1);
+  border-radius: 8px;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.7fr);
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.role-dashboard__hero p:first-child {
+  color: #e49400;
+  font-size: 0.78rem;
+  font-weight: 900;
+  margin: 0 0 0.4rem;
+  text-transform: uppercase;
+}
+
+.role-dashboard__hero h1 {
+  color: #210a55;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1.05;
+  margin: 0 0 0.75rem;
+}
+
+.role-dashboard__hero span {
+  background: #f8e9c7;
+  border-radius: 999px;
+  color: #8a5600;
+  display: inline-flex;
+  font-weight: 800;
+  padding: 0.45rem 0.75rem;
+}
+
+.role-dashboard__hero > p {
+  align-self: end;
+  color: #443a60;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.role-dashboard__stats {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.role-dashboard__stats article {
+  align-items: center;
+  background: #fff;
+  border: 1px solid rgba(31, 22, 61, 0.1);
+  border-radius: 8px;
+  display: flex;
+  gap: 1rem;
+  min-height: 7rem;
+  padding: 1rem;
+}
+
+.role-dashboard__stats article > span {
+  align-items: center;
+  background: #eee7f5;
+  border-radius: 999px;
+  color: #210a55;
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-size: 1.35rem;
+  height: 3rem;
+  justify-content: center;
+  width: 3rem;
+}
+
+.role-dashboard__stats strong {
+  color: #210a55;
+  display: block;
+  font-size: 1.65rem;
+  line-height: 1;
+}
+
+.role-dashboard__stats p {
+  color: #5f547a;
+  margin: 0.3rem 0 0;
+}
+
+.role-dashboard__actions {
+  background: #fff;
+  border: 1px solid rgba(31, 22, 61, 0.1);
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.role-dashboard__actions h2 {
+  color: #210a55;
+  font-size: 1.15rem;
+  margin: 0 0 1rem;
+}
+
+.role-dashboard__actions > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.role-dashboard__actions a {
+  align-items: center;
+  background: #210a55;
+  border-radius: 8px;
+  color: #fff;
+  display: inline-flex;
+  font-weight: 800;
+  gap: 0.55rem;
+  min-height: 2.75rem;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+}
+
+@media (max-width: 980px) {
+  .role-dashboard__hero,
+  .role-dashboard__stats {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .role-dashboard__hero,
+  .role-dashboard__stats {
+    grid-template-columns: 1fr;
+  }
+
+  .role-dashboard__actions a {
+    width: 100%;
+  }
+}

@@ -1,0 +1,29 @@
+<div class="public-layout">
+  <app-public-header *ngIf="!isAuthPage"></app-public-header>
+
+  <main class="public-main">
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer class="public-footer" *ngIf="!isAuthPage">
+    <div class="public-footer__brand">
+      <img src="assets/home/cmda-logo.svg" alt="" aria-hidden="true">
+      <span>
+        <strong>CMDA DEV</strong>
+        <small>Communaute Catholique Mere du Divin Amour</small>
+      </span>
+    </div>
+    <p class="public-footer__motto">A Jesus, dans les pas de Marie</p>
+    <div class="public-footer__links" aria-label="Liens sociaux">
+      <a href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+        <i class="bi bi-facebook"></i>
+      </a>
+      <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+        <i class="bi bi-instagram"></i>
+      </a>
+      <a href="https://www.youtube.com" target="_blank" rel="noopener" aria-label="YouTube">
+        <i class="bi bi-youtube"></i>
+      </a>
+    </div>
+  </footer>
+</div>

@@ -1,18 +1,169 @@
-<div class="modal-header">
-  <h5 class="modal-title">Détails du membre</h5>
-  <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
-</div>
-<div class="modal-body">
-  <p><strong>ID :</strong> {{ member.id }}</p>
-  <p><strong>Prénom :</strong> {{ member.firstName }}</p>
-  <p><strong>Nom :</strong> {{ member.lastName }}</p>
-  <p><strong>Email :</strong> {{ member.email }}</p>
-  <p><strong>Téléphone :</strong> {{ member.phoneNumber }}</p>
-  <p><strong>Date de Naissance :</strong> {{ member.birthday | date: 'yyyy-MM-dd' }}</p>
-  <p><strong>Profession :</strong> {{ member.profession }}</p>
-  <p><strong>Statut :</strong> {{ member.status }}</p>
-  <p><strong>Fraternité :</strong> {{ member.fraternityName }}</p>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-secondary" (click)="closeModal()">Fermer</button>
-</div>
+<section class="member-detail" *ngIf="member as currentMember; else loadingState">
+  <header class="member-detail__header">
+    <button type="button" class="member-detail__back" (click)="goBack()">
+      <i class="bi bi-arrow-left"></i>
+      <span>Retour</span>
+    </button>
+
+    <div>
+      <p>Fiche de renseignement</p>
+      <h1>{{ fullName }}</h1>
+      <span>{{ currentMember.fraternityName || 'Fraternite a renseigner' }}</span>
+    </div>
+
+    <div class="member-detail__actions">
+      <button type="button" (click)="goToEdit()">
+        <i class="bi bi-pencil"></i>
+        <span>Modifier</span>
+      </button>
+      <button type="button" (click)="print()">
+        <i class="bi bi-printer"></i>
+        <span>Imprimer</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="member-detail__sheet">
+    <aside class="member-detail__identity">
+      <div class="member-detail__photo">
+        <img *ngIf="currentMember.photoUrl; else initialsAvatar" [src]="currentMember.photoUrl" [alt]="fullName">
+        <ng-template #initialsAvatar>
+          <span>{{ initials }}</span>
+        </ng-template>
+      </div>
+
+      <h2>{{ fullName }}</h2>
+      <p>{{ currentMember.profession || 'Profession non renseignee' }}</p>
+      <span class="member-detail__status">{{ currentMember.status }}</span>
+
+      <dl>
+        <div>
+          <dt>Fraternite</dt>
+          <dd>{{ currentMember.fraternityName || 'A renseigner' }}</dd>
+        </div>
+        <div>
+          <dt>Region</dt>
+          <dd>{{ currentMember.regionName || 'A renseigner' }}</dd>
+        </div>
+        <div>
+          <dt>Province</dt>
+          <dd>{{ currentMember.provinceName || 'A renseigner' }}</dd>
+        </div>
+      </dl>
+    </aside>
+
+    <main class="member-detail__sections">
+      <section>
+        <h2><i class="bi bi-person-vcard"></i> Identite</h2>
+        <div class="member-detail__grid">
+          <article>
+            <span>Prenom</span>
+            <strong>{{ currentMember.firstName }}</strong>
+          </article>
+          <article>
+            <span>Nom</span>
+            <strong>{{ currentMember.lastName }}</strong>
+          </article>
+          <article>
+            <span>Date de naissance</span>
+            <strong>{{ currentMember.birthday | date: 'dd/MM/yyyy' }}</strong>
+          </article>
+          <article>
+            <span>Age</span>
+            <strong>{{ age !== null ? age + ' ans' : 'Non calcule' }}</strong>
+          </article>
+          <article>
+            <span>Profession</span>
+            <strong>{{ currentMember.profession || 'Non renseignee' }}</strong>
+          </article>
+          <article>
+            <span>Statut</span>
+            <strong>{{ currentMember.status }}</strong>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2><i class="bi bi-telephone"></i> Contact</h2>
+        <div class="member-detail__grid">
+          <article>
+            <span>Telephone</span>
+            <strong>{{ currentMember.phoneNumber || 'Non renseigne' }}</strong>
+          </article>
+          <article>
+            <span>Email</span>
+            <strong>{{ currentMember.email || 'Non renseigne' }}</strong>
+          </article>
+          <article>
+            <span>Adresse</span>
+            <strong>A prevoir dans le modele</strong>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2><i class="bi bi-diagram-3"></i> Appartenance CMDA</h2>
+        <div class="member-detail__grid">
+          <article>
+            <span>Province</span>
+            <strong>{{ currentMember.provinceName || 'A renseigner' }}</strong>
+          </article>
+          <article>
+            <span>Region</span>
+            <strong>{{ currentMember.regionName || 'A renseigner' }}</strong>
+          </article>
+          <article>
+            <span>Fraternite</span>
+            <strong>{{ currentMember.fraternityName || 'A renseigner' }}</strong>
+          </article>
+          <article>
+            <span>Responsable rattache</span>
+            <strong>A prevoir</strong>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2><i class="bi bi-journal-text"></i> Parcours et responsabilites</h2>
+        <div class="member-detail__grid">
+          <article>
+            <span>Service</span>
+            <strong>A prevoir</strong>
+          </article>
+          <article>
+            <span>Groupe</span>
+            <strong>A prevoir</strong>
+          </article>
+          <article>
+            <span>Notes internes</span>
+            <strong>A prevoir selon autorisation</strong>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2><i class="bi bi-shield-check"></i> Administration</h2>
+        <div class="member-detail__grid">
+          <article>
+            <span>Identifiant</span>
+            <strong>#{{ currentMember.id }}</strong>
+          </article>
+          <article>
+            <span>Date de creation</span>
+            <strong>A prevoir</strong>
+          </article>
+          <article>
+            <span>Derniere modification</span>
+            <strong>A prevoir</strong>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+</section>
+
+<ng-template #loadingState>
+  <section class="member-detail member-detail--loading">
+    <p>{{ isLoading ? 'Chargement de la fiche membre...' : 'Aucune fiche membre disponible.' }}</p>
+  </section>
+</ng-template>

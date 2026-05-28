@@ -1,14 +1,56 @@
-<div class="login-container">
-  <h2>Connexion</h2>
-  <form (ngSubmit)="onLogin()">
-    <div>
-      <label for="username">Nom d'utilisateur</label>
-      <input type="text" id="username" [(ngModel)]="username" name="username" required>
+<section class="login-page">
+  <div class="login-page__panel">
+    <a class="login-page__brand" routerLink="/">
+      <img src="assets/home/cmda-logo.svg" alt="Logo CMDA DEV">
+      <span>
+        <strong>CMDA DEV</strong>
+        <small>Province Europe</small>
+      </span>
+    </a>
+
+    <div class="login-page__intro">
+      <p>Tous les champs sont obligatoires</p>
+      <h1>Connectez-vous a votre espace personnel</h1>
     </div>
-    <div>
+
+    <form class="login-form" (ngSubmit)="onLogin()">
+      <label for="username">Identifiant</label>
+      <input type="text" id="username" [(ngModel)]="username" name="username" autocomplete="username" required>
+
       <label for="password">Mot de passe</label>
-      <input type="password" id="password" [(ngModel)]="password" name="password" required>
+      <div class="login-form__password">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          id="password"
+          [(ngModel)]="password"
+          name="password"
+          autocomplete="current-password"
+          required
+        >
+        <button type="button" aria-label="Afficher le mot de passe" (click)="togglePasswordVisibility()">
+          <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+        </button>
+      </div>
+
+      <div class="login-form__links">
+        <a routerLink="/contact">Identifiant oublie</a>
+        <a routerLink="/contact">Mot de passe oublie</a>
+      </div>
+
+      <button type="submit" class="login-form__submit">Se connecter</button>
+    </form>
+
+    <div class="login-page__help">
+      <strong>Besoin d'acces a CMDA DEV ?</strong>
+      <p>Contactez votre responsable provincial, regional ou berger de fraternite.</p>
     </div>
-    <button type="submit">Se connecter</button>
-  </form>
-</div>
+  </div>
+
+  <aside class="login-page__visual">
+    <div class="login-page__visual-copy">
+      <h2>Connectez-vous pour acceder a votre espace personnel</h2>
+      <p>Un espace securise pour suivre la communaute, les membres et la mission confiee.</p>
+    </div>
+    <img src="assets/home/cmda-community-hero.png" alt="Communaute CMDA DEV">
+  </aside>
+</section>

@@ -1,63 +1,108 @@
-<div class="container mt-4">
-  <h2>Liste des CmdaMembers</h2>
-  <!--<button routerLink="/add" class="btn btn-primary mb-3">Ajouter un membre</button>  -->
-  <button (click)="goToAddMember()" class="btn btn-primary mb-3">Ajouter un membre</button>
+<section class="member-list">
+  <header class="member-list__hero">
+    <div>
+      <p>Liste des membres</p>
+      <h1>Membres de la communaute</h1>
+      <span>Une lecture claire, peu de colonnes, et un acces rapide aux details.</span>
+    </div>
+    <button type="button" (click)="goToAddMember()">
+      <i class="bi bi-plus-lg"></i>
+      <span>Ajouter un membre</span>
+    </button>
+  </header>
 
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>Prénom</th>
-      <th>Nom</th>
-      <th>Email</th>
-      <th>Téléphone</th>
-      <th>Date de Naissance</th>
-      <th>Profession</th>
-      <th>Statut</th>
-      <th>Fraternité</th>
-      <th>Actions</th> <!-- Nouvelle colonne pour les actions -->
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let member of cmdaMembers">
-      <td>{{ member.id }}</td>
-      <td>{{ member.firstName }}</td>
-      <td>{{ member.lastName }}</td>
-      <td>{{ member.email }}</td>
-      <td>{{ member.phoneNumber }}</td>
-      <td>{{ member.birthday | date: 'yyyy-MM-dd' }}</td>
-      <td>{{ member.profession }}</td>
-      <td>{{ member.status }}</td>
-      <td>{{ member.fraternityName }}</td>
-  <!--
-      <td>
-        <button (click)="openDetailsModal(member)" class="btn btn-info btn-sm">Détails</button>
-        <a [routerLink]="['/edit', member.id]" class="btn btn-warning btn-sm">Edit</a>
-      </td>
--->
-      <!--
-      <td>
-        <div class="d-flex justify-content-between">
-          <button (click)="openDetailsModal(member)" class="btn btn-info btn-sm me-2">Détails</button>
-          <a [routerLink]="['/edit', member.id]" class="btn btn-warning btn-sm">Edit</a>
-          <button [routerLink]="['/delete', member.id]" class="btn btn-danger">Delete</button>
+  <div class="member-list__panel">
+    <div class="member-list__filters">
+      <label>
+        <span>Recherche</span>
+        <input type="search" [(ngModel)]="searchTerm" placeholder="Rechercher un membre...">
+      </label>
+      <label>
+        <span>Statut</span>
+        <select [(ngModel)]="statusFilter">
+          <option value="">Tous les statuts</option>
+          <option value="ACTIVE">Actif</option>
+          <option value="INACTIVE">Inactif</option>
+          <option value="ARCHIVED">Archive</option>
+        </select>
+      </label>
+      <button type="button">
+        <i class="bi bi-funnel"></i>
+        <span>Filtrer</span>
+      </button>
+    </div>
+
+    <div class="member-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Membre</th>
+            <th>Appartenance</th>
+            <th>Statut</th>
+            <th>Contact</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let member of filteredMembers">
+            <td>
+              <div class="member-cell">
+                <span class="member-avatar">{{ getMemberInitials(member) }}</span>
+                <div>
+                  <strong>{{ member.firstName }} {{ member.lastName }}</strong>
+                  <small>{{ member.profession || 'Profession non renseignee' }}</small>
+                </div>
+              </div>
+            </td>
+            <td>
+              <strong>{{ member.fraternityName || 'Fraternite a renseigner' }}</strong>
+              <small>{{ member.regionName || member.provinceName || 'Perimetre a renseigner' }}</small>
+            </td>
+            <td>
+              <span class="member-status" [ngClass]="getStatusClass(member.status)">{{ member.status }}</span>
+            </td>
+            <td>
+              <strong>{{ member.phoneNumber || 'Telephone non renseigne' }}</strong>
+              <small>{{ member.email || 'Email non renseigne' }}</small>
+            </td>
+            <td>
+              <div class="member-actions">
+                <button type="button" (click)="openDetails(member)">Details</button>
+                <a [routerLink]="['/app/members', member.id, 'edit']" aria-label="Modifier">
+                  <i class="bi bi-pencil"></i>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="member-cards">
+      <article *ngFor="let member of filteredMembers">
+        <div class="member-card__top">
+          <span class="member-avatar">{{ getMemberInitials(member) }}</span>
+          <div>
+            <h2>{{ member.firstName }} {{ member.lastName }}</h2>
+            <p>{{ member.fraternityName || 'Fraternite a renseigner' }}</p>
+          </div>
+          <span class="member-status" [ngClass]="getStatusClass(member.status)">{{ member.status }}</span>
         </div>
-      </td>
--->
-
-      <td>
-        <div class="d-flex">
-          <button (click)="openDetailsModal(member)" class="btn btn-info btn-sm me-2">Détails</button>
-          <a [routerLink]="['/edit', member.id]" class="btn btn-warning btn-sm me-2">Edit</a>
-          <button [routerLink]="['/delete', member.id]" class="btn btn-danger btn-sm">Delete</button>
+        <dl>
+          <div>
+            <dt>Contact</dt>
+            <dd>{{ member.phoneNumber || member.email || 'Non renseigne' }}</dd>
+          </div>
+          <div>
+            <dt>Profession</dt>
+            <dd>{{ member.profession || 'Non renseignee' }}</dd>
+          </div>
+        </dl>
+        <div class="member-actions">
+          <button type="button" (click)="openDetails(member)">Details</button>
+          <a [routerLink]="['/app/members', member.id, 'edit']">Modifier</a>
         </div>
-      </td>
-
-
-    </tr>
-    </tbody>
-  </table>
-
-
-
-</div>
+      </article>
+    </div>
+  </div>
+</section>
