@@ -68,6 +68,10 @@ Brancher `/app/provincial/province` sur les vraies donnees de la province de l'u
 
 Livrable : province, regions, metriques et cartes dynamiques.
 
+Etat : termine.
+
+Documentation : `roadmap_r6_e4_espace_provincial_dynamique.md`.
+
 ### R6-E5 - Espace Regional dynamique
 
 Brancher `/app/regional/region` sur la vraie region de l'utilisateur connecte.

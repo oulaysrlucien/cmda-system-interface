@@ -9,6 +9,7 @@ export interface Region {
   name: string;
   description?: string;
   provinceId?: number;
+  fraternities?: Fraternity[];
 }
 
 export interface Fraternity {
@@ -16,4 +17,5 @@ export interface Fraternity {
   name: string;
   description?: string;
   regionId?: number;
+  members?: unknown[];
 }

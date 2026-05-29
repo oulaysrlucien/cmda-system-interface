@@ -38,6 +38,8 @@
         <div>
           <h2>{{ collectionTitle }}</h2>
           <p>{{ collectionSubtitle }}</p>
+          <p *ngIf="isLoading">Chargement des donnees de la province...</p>
+          <p *ngIf="loadError">{{ loadError }}</p>
         </div>
         <button type="button">
           <i class="bi bi-plus"></i>

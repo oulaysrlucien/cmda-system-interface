@@ -28,6 +28,10 @@ export class RegionService {
     return this.http.get<Region[]>(`${this.regionsUrl}/province/${provinceId}`);
   }
 
+  getCurrentUserProvinceRegions(): Observable<Region[]> {
+    return this.http.get<Region[]>(`${environment.apiBaseUrl}/api/me/province/regions`);
+  }
+
   getCurrentUserRegion(): Observable<Region | null> {
     return this.currentUserScopeService.getScope().pipe(
       map(scope => scope.region ? {
