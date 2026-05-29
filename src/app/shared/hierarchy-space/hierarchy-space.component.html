@@ -60,7 +60,7 @@
             <ul>
               <li *ngFor="let metric of item.metrics">{{ metric }}</li>
             </ul>
-            <a *ngIf="item.route; else staticItem" [routerLink]="item.route">
+            <a *ngIf="item.route; else staticItem" [routerLink]="item.route" [queryParams]="item.queryParams || null">
               {{ item.actionLabel || 'Voir' }} <i class="bi bi-arrow-right"></i>
             </a>
             <ng-template #staticItem>

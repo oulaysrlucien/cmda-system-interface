@@ -11,6 +11,7 @@ export interface HierarchyItem {
   description: string;
   metrics: string[];
   route?: string;
+  queryParams?: Record<string, string | number>;
   actionLabel?: string;
 }
 

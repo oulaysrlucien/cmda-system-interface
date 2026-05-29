@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { forkJoin } from 'rxjs';
+import { forkJoin, of, switchMap } from 'rxjs';
 import { HierarchyItem, HierarchyMetric, HierarchySideItem, HierarchySpaceViewModel } from '../models/hierarchy-space.model';
-import { Region } from '../models/organization-unit.model';
+import { CurrentUserScope } from '../models/current-user-scope.model';
+import { Fraternity, Region } from '../models/organization-unit.model';
 import { CurrentUserScopeService } from '../services/current-user-scope.service';
+import { FraternityService } from '../services/fraternity.service';
 import { RegionService } from '../services/region.service';
 
 @Component({
@@ -22,20 +24,30 @@ export class HierarchySpaceComponent implements OnInit {
     'assets/home/region-coast-photo.png'
   ];
 
+  private readonly fraternityImages = [
+    'assets/home/region-city-photo.png',
+    'assets/home/cmda-community-hero.png',
+    'assets/home/region-alps-photo.png'
+  ];
+
   constructor(
     private route: ActivatedRoute,
     private currentUserScopeService: CurrentUserScopeService,
-    private regionService: RegionService
+    private regionService: RegionService,
+    private fraternityService: FraternityService
   ) {
     this.viewModel = this.buildViewModelFromRoute();
   }
 
   ngOnInit(): void {
-    if (this.mode !== 'province') {
+    if (this.mode === 'province') {
+      this.loadProvinceSpace();
       return;
     }
 
-    this.loadProvinceSpace();
+    if (this.mode === 'region') {
+      this.loadRegionSpace();
+    }
   }
 
   get mode(): 'province' | 'region' | 'fraternity' {
@@ -147,9 +159,121 @@ export class HierarchySpaceComponent implements OnInit {
           'Responsables a consolider'
         ],
         route: '/app/regional/region',
+        queryParams: { regionId: region.id },
         actionLabel: 'Voir la region'
       };
     });
+  }
+
+  private loadRegionSpace(): void {
+    this.isLoading = true;
+    this.loadError = '';
+
+    this.currentUserScopeService.getScope().pipe(
+      switchMap(scope => {
+        const routeRegionId = Number(this.route.snapshot.queryParamMap.get('regionId'));
+        const selectedRegionId = routeRegionId || scope.region?.id;
+
+        if (!selectedRegionId) {
+          return this.regionService.getCurrentUserProvinceRegions().pipe(
+            switchMap(regions => {
+              const firstRegionId = regions[0]?.id;
+
+              return forkJoin({
+                scope: of(scope),
+                regions: of(regions),
+                fraternities: firstRegionId ? this.fraternityService.getScopedRegionFraternities(firstRegionId) : of([])
+              });
+            })
+          );
+        }
+
+        const regions$ = routeRegionId ? this.regionService.getCurrentUserProvinceRegions() : of([]);
+        const fraternities$ = this.fraternityService.getScopedRegionFraternities(selectedRegionId);
+
+        return forkJoin({
+          scope: of(scope),
+          regions: regions$,
+          fraternities: fraternities$
+        });
+      })
+    ).subscribe({
+      next: ({ scope, regions, fraternities }) => {
+        const routeRegionId = Number(this.route.snapshot.queryParamMap.get('regionId'));
+        const selectedRegion = this.resolveSelectedRegion(scope, regions, routeRegionId);
+        const membersCount = this.countFraternityMembers(fraternities);
+
+        this.viewModel = {
+          ...this.viewModel,
+          eyebrow: selectedRegion?.name || scope.region?.name || this.viewModel.eyebrow,
+          title: selectedRegion?.name || scope.region?.name || this.viewModel.title,
+          managerName: scope.username || this.viewModel.managerName,
+          metrics: [
+            { label: 'Fraternites actives', value: String(fraternities.length), icon: 'bi-house-heart' },
+            { label: 'Membres au total', value: String(membersCount), icon: 'bi-people' },
+            { label: 'Responsables', value: this.viewModel.metrics[2]?.value || '0', icon: 'bi-person-check' },
+            { label: 'Activites a venir', value: this.viewModel.metrics[3]?.value || '0', icon: 'bi-calendar-event' }
+          ],
+          items: this.mapFraternitiesToItems(fraternities)
+        };
+        this.isLoading = false;
+      },
+      error: error => {
+        console.error('Erreur lors du chargement dynamique de l espace regional', error);
+        this.loadError = 'Impossible de charger les donnees dynamiques de la region. Affichage de secours.';
+        this.isLoading = false;
+      }
+    });
+  }
+
+  private resolveSelectedRegion(
+    scope: CurrentUserScope,
+    regions: Region[],
+    routeRegionId: number
+  ): Region | null {
+    if (routeRegionId) {
+      return regions.find(region => region.id === routeRegionId) || null;
+    }
+
+    if (regions.length) {
+      return regions[0];
+    }
+
+    return scope.region ? {
+      id: scope.region.id,
+      name: scope.region.name,
+      description: scope.region.description,
+      provinceId: scope.province?.id
+    } : null;
+  }
+
+  private mapFraternitiesToItems(fraternities: Fraternity[]): HierarchyItem[] {
+    if (!fraternities.length) {
+      return [];
+    }
+
+    return fraternities.map((fraternity, index) => {
+      const membersCount = fraternity.members?.length || 0;
+
+      return {
+        name: fraternity.name,
+        location: `Fraternite #${fraternity.id}`,
+        image: this.fraternityImages[index % this.fraternityImages.length],
+        description: fraternity.description || 'Fraternite rattachee a cette region.',
+        metrics: [
+          `${membersCount} membres`,
+          'Responsable a consolider',
+          'Activites a consolider'
+        ],
+        route: '/app/berger/fraternity',
+        queryParams: { fraternityId: fraternity.id },
+        actionLabel: 'Voir la fraternite'
+      };
+    });
+  }
+
+  private countFraternityMembers(fraternities: Fraternity[]): number {
+    return fraternities.reduce((total, fraternity) => total + (fraternity.members?.length || 0), 0);
   }
 
   private buildViewModelFromRoute(): HierarchySpaceViewModel {

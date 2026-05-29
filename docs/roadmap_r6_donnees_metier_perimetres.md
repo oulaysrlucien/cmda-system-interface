@@ -78,6 +78,10 @@ Brancher `/app/regional/region` sur la vraie region de l'utilisateur connecte.
 
 Livrable : region, fraternites, metriques et cartes dynamiques.
 
+Etat : termine.
+
+Documentation : `roadmap_r6_e5_espace_regional_dynamique.md`.
+
 ### R6-E6 - Espace Berger / Fraternite dynamique
 
 Brancher `/app/berger/fraternity` sur la vraie fraternite de l'utilisateur connecte.
