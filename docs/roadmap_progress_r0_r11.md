@@ -12,7 +12,7 @@ Ce fichier sert de tableau de progression officiel. Une roadmap est cochee uniqu
 | [x] | R3 | Validee | Routes et roles | `roadmap_r3_routes_roles.md` |
 | [x] | R4 | Validee | Gestion des erreurs | `roadmap_r4_gestion_erreurs.md` |
 | [x] | R5 | Validee V0 | Architecture navigation et espaces utilisateurs | `roadmap_r5_architecture_navigation.md` |
-| [ ] | R6 | En cours - E2 terminee | Donnees metier et perimetres utilisateurs | `roadmap_r6_donnees_metier_perimetres.md` |
+| [ ] | R6 | En cours - E3 terminee | Donnees metier et perimetres utilisateurs | `roadmap_r6_donnees_metier_perimetres.md` |
 | [ ] | R7 | A venir | CRUD structures hierarchiques | A creer |
 | [ ] | R8 | A venir | Membres avances | A creer |
 | [ ] | R9 | A venir | Tableaux de bord et statistiques | A creer |
@@ -45,4 +45,5 @@ R6 doit brancher les ecrans R5 sur les vraies donnees metier et verrouiller les 
 
 - [x] R6-E1 - Audit donnees metier et endpoints disponibles.
 - [x] R6-E2 - Modele de perimetre utilisateur et endpoint `/api/me/scope`.
-- [ ] R6-E3 - Services Angular dynamiques.
+- [x] R6-E3 - Services Angular dynamiques.
+- [ ] R6-E4 - Espace Provincial dynamique.

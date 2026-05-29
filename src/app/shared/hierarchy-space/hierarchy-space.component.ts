@@ -1,26 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
-interface HierarchyMetric {
-  label: string;
-  value: string;
-  icon: string;
-}
-
-interface HierarchyItem {
-  name: string;
-  location: string;
-  image: string;
-  description: string;
-  metrics: string[];
-  route: string;
-}
-
-interface SideItem {
-  date: string;
-  title: string;
-  subtitle: string;
-}
+import { HierarchyItem, HierarchyMetric, HierarchySideItem } from '../models/hierarchy-space.model';
 
 @Component({
   selector: 'app-hierarchy-space',
@@ -78,11 +58,11 @@ export class HierarchySpaceComponent {
     return this.route.snapshot.data['items'] || [];
   }
 
-  get events(): SideItem[] {
+  get events(): HierarchySideItem[] {
     return this.route.snapshot.data['events'] || [];
   }
 
-  get documents(): SideItem[] {
+  get documents(): HierarchySideItem[] {
     return this.route.snapshot.data['documents'] || [];
   }
 }

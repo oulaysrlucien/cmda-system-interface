@@ -58,6 +58,10 @@ Ajouter ou completer les services Angular pour remplacer les donnees statiques :
 
 Livrable : services types, prets pour les vues hierarchiques R5.
 
+Etat : termine.
+
+Documentation : `roadmap_r6_e3_services_angular_dynamiques.md`.
+
 ### R6-E4 - Espace Provincial dynamique
 
 Brancher `/app/provincial/province` sur les vraies donnees de la province de l'utilisateur connecte.

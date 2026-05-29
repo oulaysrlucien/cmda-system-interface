@@ -241,6 +241,11 @@
   text-decoration: none;
 }
 
+.hierarchy-card__static {
+  color: #5f547a;
+  font-weight: 900;
+}
+
 .hierarchy-side {
   display: flex;
   flex-direction: column;

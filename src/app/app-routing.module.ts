@@ -139,7 +139,8 @@ const routes: Routes = [
               image: 'assets/home/region-alps.svg',
               description: 'Portes par l Esprit, avancent dans l unite et la mission.',
               metrics: ['9 fraternites', '215 membres', '15 responsables'],
-              route: '/app/regional/region'
+              route: '/app/regional/region',
+              actionLabel: 'Voir la region'
             },
             {
               name: 'Region Sainte Marie',
@@ -147,7 +148,8 @@ const routes: Routes = [
               image: 'assets/home/region-city.svg',
               description: 'Vivons la charite et la communion au coeur des fraternites.',
               metrics: ['8 fraternites', '187 membres', '14 responsables'],
-              route: '/app/regional/region'
+              route: '/app/regional/region',
+              actionLabel: 'Voir la region'
             },
             {
               name: 'Region Saint Joseph',
@@ -155,7 +157,8 @@ const routes: Routes = [
               image: 'assets/home/region-coast.svg',
               description: 'Servir avec joie, annoncer avec amour.',
               metrics: ['7 fraternites', '160 membres', '19 responsables'],
-              route: '/app/regional/region'
+              route: '/app/regional/region',
+              actionLabel: 'Voir la region'
             }
           ],
           events: [
@@ -220,7 +223,8 @@ const routes: Routes = [
               image: 'assets/home/region-city.svg',
               description: 'Fraternite urbaine au service de la mission.',
               metrics: ['42 membres', 'Fr. Antoine Kouassi', 'Catechese, Priere'],
-              route: '/app/berger/fraternity'
+              route: '/app/berger/fraternity',
+              actionLabel: 'Voir la fraternite'
             },
             {
               name: 'Fraternite Cana',
@@ -228,7 +232,8 @@ const routes: Routes = [
               image: 'assets/home/cmda-community-hero.png',
               description: 'Vie fraternelle, couples et familles.',
               metrics: ['38 membres', 'Sr. Marie Claire', 'Liturgie, Chorale'],
-              route: '/app/berger/fraternity'
+              route: '/app/berger/fraternity',
+              actionLabel: 'Voir la fraternite'
             },
             {
               name: 'Fraternite Bethleem',
@@ -236,7 +241,8 @@ const routes: Routes = [
               image: 'assets/home/region-alps.svg',
               description: 'Jeunes, formation et croissance spirituelle.',
               metrics: ['35 membres', 'Fr. Paul Koffi', 'Jeunes, Formation'],
-              route: '/app/berger/fraternity'
+              route: '/app/berger/fraternity',
+              actionLabel: 'Voir la fraternite'
             }
           ],
           events: [
@@ -301,7 +307,7 @@ const routes: Routes = [
               image: 'assets/home/cmda-community-hero.png',
               description: 'Service des jeunes et accueil.',
               metrics: ['14 membres', '2 responsables', 'Actif'],
-              route: '/app/members'
+              actionLabel: 'Statique MVP'
             },
             {
               name: 'Chorale',
@@ -309,7 +315,7 @@ const routes: Routes = [
               image: 'assets/home/region-city.svg',
               description: 'Animation des temps de priere.',
               metrics: ['11 membres', '1 responsable', 'Actif'],
-              route: '/app/members'
+              actionLabel: 'Statique MVP'
             },
             {
               name: 'Catechese',
@@ -317,7 +323,7 @@ const routes: Routes = [
               image: 'assets/home/region-alps.svg',
               description: 'Transmission et accompagnement.',
               metrics: ['17 membres', '3 responsables', 'Actif'],
-              route: '/app/members'
+              actionLabel: 'Statique MVP'
             }
           ],
           events: [

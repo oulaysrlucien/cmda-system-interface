@@ -58,9 +58,12 @@
             <ul>
               <li *ngFor="let metric of item.metrics">{{ metric }}</li>
             </ul>
-            <a [routerLink]="item.route">
-              Voir <i class="bi bi-arrow-right"></i>
+            <a *ngIf="item.route; else staticItem" [routerLink]="item.route">
+              {{ item.actionLabel || 'Voir' }} <i class="bi bi-arrow-right"></i>
             </a>
+            <ng-template #staticItem>
+              <small class="hierarchy-card__static">{{ item.actionLabel || 'Section statique MVP' }}</small>
+            </ng-template>
           </div>
         </article>
       </div>
