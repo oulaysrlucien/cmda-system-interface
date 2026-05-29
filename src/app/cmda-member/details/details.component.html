@@ -12,9 +12,17 @@
     </div>
 
     <div class="member-detail__actions">
-      <button type="button" (click)="goToEdit()">
+      <button type="button" *ngIf="!isEditMode" (click)="goToEdit()">
         <i class="bi bi-pencil"></i>
         <span>Modifier</span>
+      </button>
+      <button type="button" *ngIf="isEditMode" (click)="saveEdit()" [disabled]="isSaving">
+        <i class="bi bi-save"></i>
+        <span>{{ isSaving ? 'Enregistrement...' : 'Enregistrer' }}</span>
+      </button>
+      <button type="button" *ngIf="isEditMode" class="member-detail__actions-secondary" (click)="cancelEdit()" [disabled]="isSaving">
+        <i class="bi bi-x-lg"></i>
+        <span>Annuler</span>
       </button>
       <button type="button" (click)="print()">
         <i class="bi bi-printer"></i>
@@ -53,52 +61,104 @@
     </aside>
 
     <main class="member-detail__sections">
+      <p class="member-detail__edit-note" *ngIf="isEditMode">
+        Mode edition actif : modifiez les champs utiles, puis enregistrez depuis le bandeau de la fiche.
+      </p>
+
       <section>
         <h2><i class="bi bi-person-vcard"></i> Identite</h2>
-        <div class="member-detail__grid">
+        <div class="member-detail__grid" *ngIf="editableMember as editMember; else identityRead">
           <article>
-            <span>Prenom</span>
-            <strong>{{ currentMember.firstName }}</strong>
+            <label for="detailFirstName">Prenom</label>
+            <input id="detailFirstName" type="text" [(ngModel)]="editMember.firstName" name="detailFirstName">
           </article>
           <article>
-            <span>Nom</span>
-            <strong>{{ currentMember.lastName }}</strong>
+            <label for="detailLastName">Nom</label>
+            <input id="detailLastName" type="text" [(ngModel)]="editMember.lastName" name="detailLastName">
           </article>
           <article>
-            <span>Date de naissance</span>
-            <strong>{{ currentMember.birthday | date: 'dd/MM/yyyy' }}</strong>
+            <label for="detailBirthday">Date de naissance</label>
+            <input id="detailBirthday" type="date" [(ngModel)]="editMember.birthday" name="detailBirthday">
           </article>
           <article>
             <span>Age</span>
             <strong>{{ age !== null ? age + ' ans' : 'Non calcule' }}</strong>
           </article>
           <article>
-            <span>Profession</span>
-            <strong>{{ currentMember.profession || 'Non renseignee' }}</strong>
+            <label for="detailProfession">Profession</label>
+            <input id="detailProfession" type="text" [(ngModel)]="editMember.profession" name="detailProfession">
           </article>
           <article>
-            <span>Statut</span>
-            <strong>{{ currentMember.status }}</strong>
+            <label for="detailStatus">Statut</label>
+            <select id="detailStatus" [(ngModel)]="editMember.status" name="detailStatus">
+              <option value="ACTIVE">Actif</option>
+              <option value="INACTIVE">Inactif</option>
+              <option value="ARCHIVED">Archive</option>
+            </select>
           </article>
         </div>
+        <ng-template #identityRead>
+          <div class="member-detail__grid">
+            <article>
+              <span>Prenom</span>
+              <strong>{{ currentMember.firstName }}</strong>
+            </article>
+            <article>
+              <span>Nom</span>
+              <strong>{{ currentMember.lastName }}</strong>
+            </article>
+            <article>
+              <span>Date de naissance</span>
+              <strong>{{ currentMember.birthday | date: 'dd/MM/yyyy' }}</strong>
+            </article>
+            <article>
+              <span>Age</span>
+              <strong>{{ age !== null ? age + ' ans' : 'Non calcule' }}</strong>
+            </article>
+            <article>
+              <span>Profession</span>
+              <strong>{{ currentMember.profession || 'Non renseignee' }}</strong>
+            </article>
+            <article>
+              <span>Statut</span>
+              <strong>{{ currentMember.status }}</strong>
+            </article>
+          </div>
+        </ng-template>
       </section>
 
       <section>
         <h2><i class="bi bi-telephone"></i> Contact</h2>
-        <div class="member-detail__grid">
+        <div class="member-detail__grid" *ngIf="editableMember as editMember; else contactRead">
           <article>
-            <span>Telephone</span>
-            <strong>{{ currentMember.phoneNumber || 'Non renseigne' }}</strong>
+            <label for="detailPhone">Telephone</label>
+            <input id="detailPhone" type="text" [(ngModel)]="editMember.phoneNumber" name="detailPhone">
           </article>
           <article>
-            <span>Email</span>
-            <strong>{{ currentMember.email || 'Non renseigne' }}</strong>
+            <label for="detailEmail">Email</label>
+            <input id="detailEmail" type="email" [(ngModel)]="editMember.email" name="detailEmail">
           </article>
           <article>
             <span>Adresse</span>
             <strong>A prevoir dans le modele</strong>
           </article>
         </div>
+        <ng-template #contactRead>
+          <div class="member-detail__grid">
+            <article>
+              <span>Telephone</span>
+              <strong>{{ currentMember.phoneNumber || 'Non renseigne' }}</strong>
+            </article>
+            <article>
+              <span>Email</span>
+              <strong>{{ currentMember.email || 'Non renseigne' }}</strong>
+            </article>
+            <article>
+              <span>Adresse</span>
+              <strong>A prevoir dans le modele</strong>
+            </article>
+          </div>
+        </ng-template>
       </section>
 
       <section>

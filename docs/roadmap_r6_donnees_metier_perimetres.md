@@ -24,116 +24,99 @@ Chaque role voit uniquement son perimetre :
 - `REGIONAL` : sa region, ses fraternites, les membres rattaches.
 - `BERGER` : sa fraternite et ses membres.
 
-## Etapes proposees
+## Etapes definies
 
-### R6-E1 - Audit API et modeles metier
+### R6-E1 - Audit des donnees metier et endpoints disponibles
 
-**Objectif**
+Auditer le backend, les DTOs, les services Angular et les donnees statiques encore presentes dans R5.
 
-Verifier les endpoints Spring Boot disponibles pour :
+Livrable : `roadmap_r6_e1_audit_donnees_metier.md`
 
-- Province.
-- Region.
-- Fraternity.
-- CmdaMember.
-- User.
+### R6-E2 - Modele de perimetre utilisateur
 
-**Livrable**
+Definir precisement ce que chaque role voit et quels endpoints doivent porter ce perimetre.
 
-- Diagnostic des endpoints existants et manquants.
+Livrables :
 
-### R6-E2 - Services front Province / Region / Fraternity
+- matrice des perimetres `ADMIN`, `PROVINCIAL`, `REGIONAL`, `BERGER`.
+- proposition d'endpoints "mon perimetre".
 
-**Objectif**
+### R6-E3 - Services Angular dynamiques
 
-Ajouter ou completer les services Angular :
+Ajouter ou completer les services Angular pour remplacer les donnees statiques :
 
+- `CurrentUserScopeService`
 - `ProvinceService`
 - `RegionService`
 - `FraternityService`
+- `CmdaMemberService`
 
-**Livrable**
+Livrable : services types, prets pour les vues hierarchiques R5.
 
-- Services typés, prets pour les vues hierarchiques R5.
+### R6-E4 - Espace Provincial dynamique
 
-### R6-E3 - Chargement reel des espaces hierarchiques
+Brancher `/app/provincial/province` sur les vraies donnees de la province de l'utilisateur connecte.
 
-**Objectif**
+Livrable : province, regions, metriques et cartes dynamiques.
 
-Remplacer les donnees statiques de `HierarchySpaceComponent` par des donnees API.
+### R6-E5 - Espace Regional dynamique
 
-**Livrable**
+Brancher `/app/regional/region` sur la vraie region de l'utilisateur connecte.
 
-- Espace provincial avec vraies regions.
-- Espace regional avec vraies fraternites.
-- Espace berger avec vraie fraternite.
+Livrable : region, fraternites, metriques et cartes dynamiques.
 
-### R6-E4 - Liste membres selon perimetre utilisateur
+### R6-E6 - Espace Berger / Fraternite dynamique
 
-**Objectif**
+Brancher `/app/berger/fraternity` sur la vraie fraternite de l'utilisateur connecte.
 
-Utiliser les endpoints existants :
+Livrable : fraternite, groupes/services si disponibles, metriques et acces membres dynamiques.
 
-- `getMembersForCurrentUser`
-- `searchMembers`
+### R6-E7 - Liste membres par perimetre
 
-pour afficher les membres selon le role connecte.
+Finaliser la liste membres selon le role connecte.
 
-**Livrable**
+Livrables :
 
-- `ADMIN` voit tout.
-- `PROVINCIAL` voit son perimetre province.
-- `REGIONAL` voit son perimetre region.
-- `BERGER` voit sa fraternite.
+- `ADMIN` utilise `/members/all`.
+- `PROVINCIAL`, `REGIONAL`, `BERGER` utilisent `/members`.
+- recherche et filtres restent dans le perimetre backend.
 
-### R6-E5 - Filtres dynamiques
+### R6-E8 - Fiche detail membre securisee
 
-**Objectif**
+Verifier que la fiche detail respecte le perimetre backend.
 
-Brancher les filtres sur les donnees disponibles :
+Livrables :
 
-- Province.
-- Region.
-- Fraternite.
-- Statut.
-- Recherche texte.
+- `/app/members/:id` charge uniquement un membre visible par l'utilisateur connecte.
+- gestion propre des cas hors perimetre.
 
-**Livrable**
+### R6-E9 - Nettoyage des donnees statiques
 
-- Filtres coherents selon le role.
+Retirer progressivement les donnees mockees de `app-routing.module.ts`.
 
-### R6-E6 - Gestion des etats UI
+Livrables :
 
-**Objectif**
+- routes reduites au mode ou aux informations minimales.
+- composants alimentes par services API.
 
-Ajouter les etats :
+### R6-E10 - Tests et validation metier
 
-- Chargement.
-- Vide.
-- Erreur.
-- Acces refuse.
+Valider les parcours reels :
 
-**Livrable**
+- Provincial -> regions -> fraternites -> membres.
+- Regional -> fraternites -> membres -> detail.
+- Berger -> fraternite -> membres -> detail.
+- tentatives hors perimetre.
 
-- Ecrans propres quand il n'y a pas encore de donnees ou quand l'API echoue.
-
-### R6-E7 - Verification securite perimetres
-
-**Objectif**
-
-Verifier que le front ne montre pas de donnees hors perimetre, et que le back bloque aussi ces acces.
-
-**Livrable**
-
-- Tests manuels et documentation des cas par role.
+Livrable : validation manuelle documentee.
 
 ## Livrable R6 attendu
 
 A la fin de R6, les ecrans R5 ne seront plus seulement des maquettes fonctionnelles :
 
-- Les regions proviendront de l'API.
-- Les fraternites proviendront de l'API.
-- Les membres seront charges selon le role.
-- Les filtres seront dynamiques.
-- Les perimetres seront respectes.
+- les regions proviendront de l'API.
+- les fraternites proviendront de l'API.
+- les membres seront charges selon le role.
+- les filtres seront dynamiques.
+- les perimetres seront respectes.
 

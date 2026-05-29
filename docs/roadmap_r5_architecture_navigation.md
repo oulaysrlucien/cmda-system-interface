@@ -367,6 +367,19 @@ Le modele actuel ne contient pas encore de champ photo. R5 doit prevoir :
 
 - Grande fiche de renseignement structuree.
 
+### R5-E7+ - Harmonisation Ajouter / Modifier membre
+
+**Actions**
+
+- Remplacer la page modifier separee par une edition inline sur la fiche detail.
+- Brancher le crayon de la liste vers la fiche detail en mode edition.
+- Refaire l'ecran Ajouter membre dans le layout connecte avec sections.
+- Conserver temporairement l'ancienne route edit en redirection.
+
+**Livrable**
+
+- Experience membre coherente : liste, ajout, fiche detail et modification restent dans la meme architecture.
+
 ### R5-E8 - Ajustements modele photo et API
 
 **Actions**

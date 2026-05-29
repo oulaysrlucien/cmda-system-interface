@@ -9,6 +9,7 @@ import {
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 import { AuthService } from '../../user-management/services/auth.service';
 
 @Injectable()
@@ -23,7 +24,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           this.router.navigate(['/unauthorized']);
         }
 
-        if (error.status === 403) {
+        if (error.status === 403 && !req.url.startsWith(environment.apiBaseUrl)) {
           this.router.navigate(['/forbidden']);
         }
 

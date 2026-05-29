@@ -11,7 +11,10 @@ import { CmdaMemberService } from '../services/cmda-member.service';
 })
 export class DetailsComponent implements OnInit {
   member: CmdaMember | null = null;
+  editableMember: CmdaMember | null = null;
   isLoading = true;
+  isEditMode = false;
+  isSaving = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,6 +28,9 @@ export class DetailsComponent implements OnInit {
 
     if (stateMember) {
       this.member = stateMember;
+      if (this.route.snapshot.queryParamMap.get('edit') === 'true') {
+        this.enableEdit();
+      }
       this.isLoading = false;
     }
 
@@ -39,6 +45,9 @@ export class DetailsComponent implements OnInit {
     this.cmdaMemberService.getMemberById(id).subscribe(
       member => {
         this.member = member;
+        if (this.route.snapshot.queryParamMap.get('edit') === 'true') {
+          this.enableEdit();
+        }
         this.isLoading = false;
       },
       error => {
@@ -57,13 +66,65 @@ export class DetailsComponent implements OnInit {
   }
 
   goToEdit(): void {
-    if (this.member) {
-      this.router.navigate(['/app/members', this.member.id, 'edit']);
-    }
+    this.enableEdit();
   }
 
   print(): void {
     window.print();
+  }
+
+  enableEdit(): void {
+    if (!this.member) {
+      return;
+    }
+
+    this.editableMember = { ...this.member };
+    this.isEditMode = true;
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { edit: true },
+      queryParamsHandling: 'merge',
+      replaceUrl: true
+    });
+  }
+
+  cancelEdit(): void {
+    this.editableMember = null;
+    this.isEditMode = false;
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { edit: null },
+      queryParamsHandling: 'merge',
+      replaceUrl: true
+    });
+  }
+
+  saveEdit(): void {
+    if (!this.editableMember) {
+      return;
+    }
+
+    this.isSaving = true;
+    this.cmdaMemberService.updateCmdaMember(this.editableMember).subscribe(
+      member => {
+        this.member = member;
+        this.editableMember = null;
+        this.isEditMode = false;
+        this.isSaving = false;
+        this.notificationService.showSuccess('Membre mis a jour avec succes.');
+        this.router.navigate([], {
+          relativeTo: this.route,
+          queryParams: { edit: null },
+          queryParamsHandling: 'merge',
+          replaceUrl: true
+        });
+      },
+      error => {
+        console.error('Erreur lors de la mise a jour du membre', error);
+        this.isSaving = false;
+        this.notificationService.showError('Une erreur est survenue lors de la mise a jour du membre.');
+      }
+    );
   }
 
   get fullName(): string {

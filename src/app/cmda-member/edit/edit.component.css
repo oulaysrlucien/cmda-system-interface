@@ -1,0 +1,12 @@
+.edit-redirect {
+  background: #fff;
+  border: 1px solid rgba(31, 22, 61, 0.1);
+  border-radius: 8px;
+  color: #210a55;
+  font-weight: 800;
+  padding: 1rem;
+}
+
+.edit-redirect p {
+  margin: 0;
+}

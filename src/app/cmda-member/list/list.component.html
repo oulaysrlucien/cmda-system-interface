@@ -68,9 +68,9 @@
             <td>
               <div class="member-actions">
                 <button type="button" (click)="openDetails(member)">Details</button>
-                <a [routerLink]="['/app/members', member.id, 'edit']" aria-label="Modifier">
+                <button type="button" class="member-actions__icon" (click)="openEdit(member)" aria-label="Modifier">
                   <i class="bi bi-pencil"></i>
-                </a>
+                </button>
               </div>
             </td>
           </tr>
@@ -100,7 +100,7 @@
         </dl>
         <div class="member-actions">
           <button type="button" (click)="openDetails(member)">Details</button>
-          <a [routerLink]="['/app/members', member.id, 'edit']">Modifier</a>
+          <button type="button" class="member-actions__link" (click)="openEdit(member)">Modifier</button>
         </div>
       </article>
     </div>

@@ -37,6 +37,8 @@ Le suivi coche / non coche est maintenu dans `roadmap_progress_r0_r11.md`.
 - `roadmap_r5_e5_espaces_utilisateurs.md`
 - `roadmap_r5_e6_espaces_hierarchiques_listes.md`
 - `roadmap_r5_e7_fiche_detail_membre.md`
+- `roadmap_r6_donnees_metier_perimetres.md`
+- `roadmap_r6_e1_audit_donnees_metier.md`
 
 ## R5 - V0 terminee
 

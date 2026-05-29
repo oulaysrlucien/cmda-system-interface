@@ -93,7 +93,9 @@
 }
 
 .member-list__filters button,
-.member-actions a {
+.member-actions a,
+.member-actions .member-actions__icon,
+.member-actions .member-actions__link {
   background: #fff;
   border: 1px solid rgba(31, 22, 61, 0.18);
   color: #210a55;

@@ -1,28 +1,3 @@
-<form (ngSubmit)="onSubmit()">
-  <div class="mb-3">
-    <label for="firstName" class="form-label">Prénom</label>
-    <input type="text" class="form-control" id="firstName" [(ngModel)]="member.firstName" name="firstName" required>
-  </div>
-  <div class="mb-3">
-    <label for="lastName" class="form-label">Nom</label>
-    <input type="text" class="form-control" id="lastName" [(ngModel)]="member.lastName" name="lastName" required>
-  </div>
-  <div class="mb-3">
-    <label for="email" class="form-label">Email</label>
-    <input type="email" class="form-control" id="email" [(ngModel)]="member.email" name="email" required>
-  </div>
-  <div class="mb-3">
-    <label for="phoneNumber" class="form-label">Téléphone</label>
-    <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="member.phoneNumber" name="phoneNumber">
-  </div>
-  <div class="mb-3">
-    <label for="birthday" class="form-label">Date de Naissance</label>
-    <input type="date" class="form-control" id="birthday" [(ngModel)]="member.birthday" name="birthday" required>
-  </div>
-  <div class="mb-3">
-    <label for="profession" class="form-label">Profession</label>
-    <input type="text" class="form-control" id="profession" [(ngModel)]="member.profession" name="profession">
-  </div>
-  <button type="submit" class="btn btn-primary">Modifier</button>
-  <button type="button" class="btn btn-secondary" (click)="onCancel()">Annuler</button>
-</form>
+<section class="edit-redirect">
+  <p>Ouverture de la fiche membre en mode edition...</p>
+</section>

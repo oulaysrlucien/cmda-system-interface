@@ -30,7 +30,8 @@ R5 V0 est consideree terminee avec :
 - Espaces Berger, Regional et Provincial.
 - Listes membres responsive.
 - Fiche detail membre en disposition paysage.
-- Documentation R5-E1 a R5-E7.
+- Harmonisation R5-E7+ : modification inline depuis la fiche et refonte de l'ajout membre.
+- Documentation R5-E1 a R5-E7+.
 
 ## Prochaine validation attendue
 
@@ -39,4 +40,3 @@ R6 doit brancher les ecrans R5 sur les vraies donnees metier et verrouiller les 
 - Berger : membres de sa fraternite.
 - Regional : fraternites et membres de sa region.
 - Provincial : regions, fraternites et membres de sa province.
-

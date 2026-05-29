@@ -1,32 +1,165 @@
-<div class="container mt-4">
-  <h2>Ajouter un nouveau membre</h2>
-  <form (ngSubmit)="onSubmit()">
-    <div class="mb-3">
-      <label for="firstName" class="form-label">Prénom</label>
-      <input type="text" class="form-control" id="firstName" [(ngModel)]="newMember.firstName" name="firstName" required>
+<section class="member-add">
+  <header class="member-add__topline">
+    <div>
+      <h1>Gestion des membres</h1>
+      <p>Suivi de la fraternite</p>
     </div>
-    <div class="mb-3">
-      <label for="lastName" class="form-label">Nom</label>
-      <input type="text" class="form-control" id="lastName" [(ngModel)]="newMember.lastName" name="lastName" required>
-    </div>
-    <div class="mb-3">
-      <label for="email" class="form-label">Email</label>
-      <input type="email" class="form-control" id="email" [(ngModel)]="newMember.email" name="email" required>
-    </div>
-    <div class="mb-3">
-      <label for="phoneNumber" class="form-label">Téléphone</label>
-      <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="newMember.phoneNumber" name="phoneNumber">
-    </div>
-    <div class="mb-3">
-      <label for="birthday" class="form-label">Date de Naissance</label>
-      <input type="date" class="form-control" id="birthday" [(ngModel)]="newMember.birthday" name="birthday" required>
-    </div>
-    <div class="mb-3">
-      <label for="profession" class="form-label">Profession</label>
-      <input type="text" class="form-control" id="profession" [(ngModel)]="newMember.profession" name="profession">
-    </div>
-    <button type="submit" class="btn btn-primary">Ajouter</button>
-    <button type="button" class="btn btn-secondary" (click)="onCancel()">Annuler</button>
+  </header>
 
+  <form class="member-add__form" (ngSubmit)="onSubmit()" #addMemberForm="ngForm">
+    <section class="member-add__hero">
+      <button type="button" class="member-add__back" (click)="onCancel()">
+        <i class="bi bi-arrow-left"></i>
+        <span>Retour</span>
+      </button>
+
+      <div>
+        <p>Ajouter un membre</p>
+        <h2>Ajouter un nouveau membre</h2>
+        <span>Renseignez les informations personnelles et communautaires du membre.</span>
+      </div>
+
+      <button type="submit" class="member-add__submit" [disabled]="addMemberForm.invalid || isSaving">
+        <i class="bi bi-save"></i>
+        <span>{{ isSaving ? 'Enregistrement...' : 'Enregistrer le membre' }}</span>
+      </button>
+    </section>
+
+    <div class="member-add__body">
+      <aside class="member-add__aside">
+        <article>
+          <i class="bi bi-info-circle-fill"></i>
+          <div>
+            <h3>Informations</h3>
+            <p>Les champs marques avec * sont obligatoires.</p>
+            <p>La photo sera ajoutee depuis la fiche detaillee.</p>
+          </div>
+        </article>
+
+        <article class="member-add__aside-note">
+          <i class="bi bi-lightbulb-fill"></i>
+          <div>
+            <h3>Bon a savoir</h3>
+            <p>Apres l'enregistrement, vous pourrez completer les informations futures depuis la fiche membre.</p>
+          </div>
+        </article>
+      </aside>
+
+      <main class="member-add__sections">
+        <section>
+          <h3><i class="bi bi-person"></i> Identite</h3>
+          <div class="member-add__grid">
+            <label>
+              <span>Prenom *</span>
+              <input type="text" name="firstName" [(ngModel)]="newMember.firstName" placeholder="Ex : Viviane" required>
+            </label>
+            <label>
+              <span>Nom *</span>
+              <input type="text" name="lastName" [(ngModel)]="newMember.lastName" placeholder="Ex : NGANOU" required>
+            </label>
+            <label>
+              <span>Date de naissance *</span>
+              <input type="date" name="birthday" [(ngModel)]="newMember.birthday" required>
+            </label>
+            <label>
+              <span>Age</span>
+              <input type="text" [value]="calculatedAge !== null ? calculatedAge + ' ans' : 'Calcule automatiquement'" readonly>
+            </label>
+            <label>
+              <span>Profession</span>
+              <input type="text" name="profession" [(ngModel)]="newMember.profession" placeholder="Ex : Enseignant">
+            </label>
+            <label>
+              <span>Statut *</span>
+              <select name="status" [(ngModel)]="newMember.status" required>
+                <option value="ACTIVE">Actif</option>
+                <option value="INACTIVE">Inactif</option>
+              </select>
+            </label>
+          </div>
+        </section>
+
+        <section>
+          <h3><i class="bi bi-telephone"></i> Contact</h3>
+          <div class="member-add__grid">
+            <label>
+              <span>Telephone</span>
+              <input type="text" name="phoneNumber" [(ngModel)]="newMember.phoneNumber" placeholder="Ex : 0123456789">
+            </label>
+            <label>
+              <span>Email *</span>
+              <input type="email" name="email" [(ngModel)]="newMember.email" placeholder="Ex : email@exemple.com" required>
+            </label>
+            <label>
+              <span>Adresse</span>
+              <input type="text" placeholder="A prevoir dans le modele" disabled>
+            </label>
+          </div>
+        </section>
+
+        <section>
+          <h3><i class="bi bi-diagram-3"></i> Appartenance CMDA</h3>
+          <div class="member-add__grid">
+            <label>
+              <span>Province</span>
+              <select disabled>
+                <option>Rattachement selon votre perimetre</option>
+              </select>
+            </label>
+            <label>
+              <span>Region</span>
+              <select disabled>
+                <option>Rattachement selon votre perimetre</option>
+              </select>
+            </label>
+            <label>
+              <span>Fraternite</span>
+              <select disabled>
+                <option>Rattachement selon votre perimetre</option>
+              </select>
+            </label>
+            <label>
+              <span>Responsable rattache</span>
+              <select disabled>
+                <option>A prevoir dans R6</option>
+              </select>
+            </label>
+          </div>
+        </section>
+
+        <section>
+          <h3><i class="bi bi-journal-text"></i> Parcours et responsabilites</h3>
+          <div class="member-add__grid">
+            <label>
+              <span>Service</span>
+              <select disabled>
+                <option>A prevoir dans le modele</option>
+              </select>
+            </label>
+            <label>
+              <span>Groupe</span>
+              <select disabled>
+                <option>A prevoir dans le modele</option>
+              </select>
+            </label>
+            <label>
+              <span>Notes internes</span>
+              <input type="text" placeholder="Informations internes futures" disabled>
+            </label>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer class="member-add__footer">
+      <button type="button" class="member-add__cancel" (click)="onCancel()" [disabled]="isSaving">
+        <i class="bi bi-x-lg"></i>
+        <span>Annuler</span>
+      </button>
+      <button type="submit" class="member-add__submit" [disabled]="addMemberForm.invalid || isSaving">
+        <i class="bi bi-save"></i>
+        <span>{{ isSaving ? 'Enregistrement...' : 'Enregistrer le membre' }}</span>
+      </button>
+    </footer>
   </form>
-</div>
+</section>
