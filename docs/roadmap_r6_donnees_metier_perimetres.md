@@ -40,6 +40,11 @@ Livrables :
 
 - matrice des perimetres `ADMIN`, `PROVINCIAL`, `REGIONAL`, `BERGER`.
 - proposition d'endpoints "mon perimetre".
+- implementation du contrat `GET /api/me/scope`.
+
+Etat : termine.
+
+Documentation : `roadmap_r6_e2_modele_perimetre_utilisateur.md`.
 
 ### R6-E3 - Services Angular dynamiques
 
@@ -119,4 +124,3 @@ A la fin de R6, les ecrans R5 ne seront plus seulement des maquettes fonctionnel
 - les membres seront charges selon le role.
 - les filtres seront dynamiques.
 - les perimetres seront respectes.
-
