@@ -88,6 +88,10 @@ Brancher `/app/berger/fraternity` sur la vraie fraternite de l'utilisateur conne
 
 Livrable : fraternite, groupes/services si disponibles, metriques et acces membres dynamiques.
 
+Etat : termine.
+
+Documentation : `roadmap_r6_e6_espace_fraternite_dynamique.md`.
+
 ### R6-E7 - Liste membres par perimetre
 
 Finaliser la liste membres selon le role connecte.

@@ -47,6 +47,11 @@ export class HierarchySpaceComponent implements OnInit {
 
     if (this.mode === 'region') {
       this.loadRegionSpace();
+      return;
+    }
+
+    if (this.mode === 'fraternity') {
+      this.loadFraternitySpace();
     }
   }
 
@@ -274,6 +279,49 @@ export class HierarchySpaceComponent implements OnInit {
 
   private countFraternityMembers(fraternities: Fraternity[]): number {
     return fraternities.reduce((total, fraternity) => total + (fraternity.members?.length || 0), 0);
+  }
+
+  private loadFraternitySpace(): void {
+    this.isLoading = true;
+    this.loadError = '';
+
+    this.currentUserScopeService.getScope().pipe(
+      switchMap(scope => {
+        const routeFraternityId = Number(this.route.snapshot.queryParamMap.get('fraternityId'));
+        const fraternity$ = routeFraternityId
+          ? this.fraternityService.getScopedFraternity(routeFraternityId)
+          : this.fraternityService.getCurrentUserFraternityDetails();
+
+        return forkJoin({
+          scope: of(scope),
+          fraternity: fraternity$
+        });
+      })
+    ).subscribe({
+      next: ({ scope, fraternity }) => {
+        const membersCount = fraternity.members?.length || 0;
+
+        this.viewModel = {
+          ...this.viewModel,
+          eyebrow: fraternity.name || scope.fraternity?.name || this.viewModel.eyebrow,
+          title: fraternity.name || scope.fraternity?.name || this.viewModel.title,
+          managerName: scope.username || this.viewModel.managerName,
+          metrics: [
+            { label: 'Membres', value: String(membersCount), icon: 'bi-people' },
+            { label: 'Responsables', value: this.viewModel.metrics[1]?.value || '0', icon: 'bi-person-check' },
+            { label: 'Groupes', value: this.viewModel.metrics[2]?.value || '3', icon: 'bi-collection' },
+            { label: 'Activites', value: this.viewModel.metrics[3]?.value || '8', icon: 'bi-calendar-event' }
+          ],
+          items: this.viewModel.items
+        };
+        this.isLoading = false;
+      },
+      error: error => {
+        console.error('Erreur lors du chargement dynamique de l espace fraternite', error);
+        this.loadError = 'Impossible de charger les donnees dynamiques de la fraternite. Affichage de secours.';
+        this.isLoading = false;
+      }
+    });
   }
 
   private buildViewModelFromRoute(): HierarchySpaceViewModel {

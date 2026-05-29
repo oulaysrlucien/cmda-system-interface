@@ -36,6 +36,14 @@ export class FraternityService {
     return this.http.get<Fraternity[]>(`${environment.apiBaseUrl}/api/me/regions/${regionId}/fraternities`);
   }
 
+  getCurrentUserFraternityDetails(): Observable<Fraternity> {
+    return this.http.get<Fraternity>(`${environment.apiBaseUrl}/api/me/fraternity`);
+  }
+
+  getScopedFraternity(fraternityId: number): Observable<Fraternity> {
+    return this.http.get<Fraternity>(`${environment.apiBaseUrl}/api/me/fraternities/${fraternityId}`);
+  }
+
   getCurrentUserFraternity(): Observable<Fraternity | null> {
     return this.currentUserScopeService.getScope().pipe(
       map(scope => scope.fraternity ? {
