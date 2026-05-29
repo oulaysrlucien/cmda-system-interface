@@ -7,6 +7,7 @@ import { Fraternity, Region } from '../models/organization-unit.model';
 import { CurrentUserScopeService } from '../services/current-user-scope.service';
 import { FraternityService } from '../services/fraternity.service';
 import { RegionService } from '../services/region.service';
+import { HIERARCHY_SPACE_DEFAULTS } from './hierarchy-space.defaults';
 
 @Component({
   selector: 'app-hierarchy-space',
@@ -325,21 +326,25 @@ export class HierarchySpaceComponent implements OnInit {
   }
 
   private buildViewModelFromRoute(): HierarchySpaceViewModel {
+    const mode = this.route.snapshot.data['mode'] || 'fraternity';
+    const defaults = HIERARCHY_SPACE_DEFAULTS[mode as HierarchySpaceViewModel['mode']];
+
     return {
-      mode: this.route.snapshot.data['mode'] || 'fraternity',
-      eyebrow: this.route.snapshot.data['eyebrow'],
-      title: this.route.snapshot.data['title'],
-      subtitle: this.route.snapshot.data['subtitle'],
-      heroImage: this.route.snapshot.data['heroImage'],
-      managerTitle: this.route.snapshot.data['managerTitle'],
-      managerName: this.route.snapshot.data['managerName'],
-      collectionTitle: this.route.snapshot.data['collectionTitle'],
-      collectionSubtitle: this.route.snapshot.data['collectionSubtitle'],
-      addLabel: this.route.snapshot.data['addLabel'],
-      metrics: this.route.snapshot.data['metrics'] || [],
-      items: this.route.snapshot.data['items'] || [],
-      events: this.route.snapshot.data['events'] || [],
-      documents: this.route.snapshot.data['documents'] || []
+      ...defaults,
+      mode,
+      eyebrow: this.route.snapshot.data['eyebrow'] || defaults.eyebrow,
+      title: this.route.snapshot.data['title'] || defaults.title,
+      subtitle: this.route.snapshot.data['subtitle'] || defaults.subtitle,
+      heroImage: this.route.snapshot.data['heroImage'] || defaults.heroImage,
+      managerTitle: this.route.snapshot.data['managerTitle'] || defaults.managerTitle,
+      managerName: this.route.snapshot.data['managerName'] || defaults.managerName,
+      collectionTitle: this.route.snapshot.data['collectionTitle'] || defaults.collectionTitle,
+      collectionSubtitle: this.route.snapshot.data['collectionSubtitle'] || defaults.collectionSubtitle,
+      addLabel: this.route.snapshot.data['addLabel'] || defaults.addLabel,
+      metrics: this.route.snapshot.data['metrics'] || defaults.metrics,
+      items: this.route.snapshot.data['items'] || defaults.items,
+      events: this.route.snapshot.data['events'] || defaults.events,
+      documents: this.route.snapshot.data['documents'] || defaults.documents
     };
   }
 }

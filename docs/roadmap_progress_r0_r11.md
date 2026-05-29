@@ -12,7 +12,7 @@ Ce fichier sert de tableau de progression officiel. Une roadmap est cochee uniqu
 | [x] | R3 | Validee | Routes et roles | `roadmap_r3_routes_roles.md` |
 | [x] | R4 | Validee | Gestion des erreurs | `roadmap_r4_gestion_erreurs.md` |
 | [x] | R5 | Validee V0 | Architecture navigation et espaces utilisateurs | `roadmap_r5_architecture_navigation.md` |
-| [ ] | R6 | En cours - E8 terminee | Donnees metier et perimetres utilisateurs | `roadmap_r6_donnees_metier_perimetres.md` |
+| [ ] | R6 | En cours - E9 terminee | Donnees metier et perimetres utilisateurs | `roadmap_r6_donnees_metier_perimetres.md` |
 | [ ] | R7 | A venir | CRUD structures hierarchiques | A creer |
 | [ ] | R8 | A venir | Membres avances | A creer |
 | [ ] | R9 | A venir | Tableaux de bord et statistiques | A creer |
@@ -51,4 +51,5 @@ R6 doit brancher les ecrans R5 sur les vraies donnees metier et verrouiller les 
 - [x] R6-E6 - Espace Berger / Fraternite dynamique.
 - [x] R6-E7 - Liste membres par perimetre.
 - [x] R6-E8 - Fiche detail membre securisee.
-- [ ] R6-E9 - Nettoyage des donnees statiques.
+- [x] R6-E9 - Nettoyage des donnees statiques.
+- [ ] R6-E10 - Tests et validation metier.

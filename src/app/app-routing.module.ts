@@ -116,60 +116,7 @@ const routes: Routes = [
         canActivate: [RoleGuard],
         data: {
           roles: ['PROVINCIAL'],
-          mode: 'province',
-          eyebrow: 'Province Europe',
-          title: 'Bienvenue, Pere Antoine',
-          subtitle: 'Ensemble, batissons une communaute unie dans la foi et l amour.',
-          heroImage: 'assets/home/region-city.svg',
-          managerTitle: 'Provincial',
-          managerName: 'Pere Antoine Kouassi',
-          collectionTitle: 'Mes regions',
-          collectionSubtitle: 'Gerez et suivez les regions de votre province.',
-          addLabel: 'Ajouter une region',
-          metrics: [
-            { label: 'Regions actives', value: '3', icon: 'bi-geo-alt' },
-            { label: 'Fraternites au total', value: '24', icon: 'bi-house-heart' },
-            { label: 'Membres au total', value: '562', icon: 'bi-people' },
-            { label: 'Responsables engages', value: '48', icon: 'bi-person-check' }
-          ],
-          items: [
-            {
-              name: 'Region Saint Jean',
-              location: 'France, Suisse',
-              image: 'assets/home/region-alps.svg',
-              description: 'Portes par l Esprit, avancent dans l unite et la mission.',
-              metrics: ['9 fraternites', '215 membres', '15 responsables'],
-              route: '/app/regional/region',
-              actionLabel: 'Voir la region'
-            },
-            {
-              name: 'Region Sainte Marie',
-              location: 'Belgique, Allemagne',
-              image: 'assets/home/region-city.svg',
-              description: 'Vivons la charite et la communion au coeur des fraternites.',
-              metrics: ['8 fraternites', '187 membres', '14 responsables'],
-              route: '/app/regional/region',
-              actionLabel: 'Voir la region'
-            },
-            {
-              name: 'Region Saint Joseph',
-              location: 'Italie, Espagne',
-              image: 'assets/home/region-coast.svg',
-              description: 'Servir avec joie, annoncer avec amour.',
-              metrics: ['7 fraternites', '160 membres', '19 responsables'],
-              route: '/app/regional/region',
-              actionLabel: 'Voir la region'
-            }
-          ],
-          events: [
-            { date: '25 MAI', title: 'Recollection provinciale', subtitle: 'Samedi 25 mai 2024' },
-            { date: '08 JUIN', title: 'Formation des responsables', subtitle: 'Paris, France' },
-            { date: '15 JUIN', title: 'Journee de priere provinciale', subtitle: 'Bruxelles, Belgique' }
-          ],
-          documents: [
-            { date: 'PDF', title: 'Rapport activites - Avril 2024.pdf', subtitle: 'PDF - 2.1 Mo' },
-            { date: 'PDF', title: 'Synthese regions - 2024.pdf', subtitle: 'PDF - 1.8 Mo' }
-          ]
+          mode: 'province'
         }
       },
       {
@@ -200,60 +147,7 @@ const routes: Routes = [
         canActivate: [RoleGuard],
         data: {
           roles: ['REGIONAL', 'PROVINCIAL'],
-          mode: 'region',
-          eyebrow: 'Region rattachee',
-          title: 'Region Saint Jean',
-          subtitle: 'Ensemble, marchons a la suite du Christ.',
-          heroImage: 'assets/home/region-alps.svg',
-          managerTitle: 'Responsable regional',
-          managerName: 'Fr. Jean-Baptiste N Guessan',
-          collectionTitle: 'Mes fraternites',
-          collectionSubtitle: 'Gerez et suivez les fraternites de votre region.',
-          addLabel: 'Ajouter une fraternite',
-          metrics: [
-            { label: 'Fraternites actives', value: '12', icon: 'bi-house-heart' },
-            { label: 'Membres au total', value: '245', icon: 'bi-people' },
-            { label: 'Responsables', value: '18', icon: 'bi-person-check' },
-            { label: 'Activites a venir', value: '8', icon: 'bi-calendar-event' }
-          ],
-          items: [
-            {
-              name: 'Fraternite Saint Paul',
-              location: 'Lyon, France',
-              image: 'assets/home/region-city.svg',
-              description: 'Fraternite urbaine au service de la mission.',
-              metrics: ['42 membres', 'Fr. Antoine Kouassi', 'Catechese, Priere'],
-              route: '/app/berger/fraternity',
-              actionLabel: 'Voir la fraternite'
-            },
-            {
-              name: 'Fraternite Cana',
-              location: 'Paris, France',
-              image: 'assets/home/cmda-community-hero.png',
-              description: 'Vie fraternelle, couples et familles.',
-              metrics: ['38 membres', 'Sr. Marie Claire', 'Liturgie, Chorale'],
-              route: '/app/berger/fraternity',
-              actionLabel: 'Voir la fraternite'
-            },
-            {
-              name: 'Fraternite Bethleem',
-              location: 'Marseille, France',
-              image: 'assets/home/region-alps.svg',
-              description: 'Jeunes, formation et croissance spirituelle.',
-              metrics: ['35 membres', 'Fr. Paul Koffi', 'Jeunes, Formation'],
-              route: '/app/berger/fraternity',
-              actionLabel: 'Voir la fraternite'
-            }
-          ],
-          events: [
-            { date: '25 MAI', title: 'Recollection regionale', subtitle: 'Lyon, France' },
-            { date: '08 JUIN', title: 'Formation des responsables', subtitle: 'Paris, France' },
-            { date: '15 JUIN', title: 'Journee de priere regionale', subtitle: 'Marseille, France' }
-          ],
-          documents: [
-            { date: 'PDF', title: 'Guide du responsable regional.pdf', subtitle: 'PDF - 2.4 Mo' },
-            { date: 'PDF', title: 'Plan action 2024 - Region.pdf', subtitle: 'PDF - 1.8 Mo' }
-          ]
+          mode: 'region'
         }
       },
       {
@@ -284,56 +178,7 @@ const routes: Routes = [
         canActivate: [RoleGuard],
         data: {
           roles: ['BERGER', 'REGIONAL', 'PROVINCIAL'],
-          mode: 'fraternity',
-          eyebrow: 'Ma fraternite',
-          title: 'Fraternite Saint Paul',
-          subtitle: 'Ensemble, marchons a la suite du Christ.',
-          heroImage: 'assets/home/cmda-community-hero.png',
-          managerTitle: 'Berger de fraternite',
-          managerName: 'Fr. Antoine Kouassi',
-          collectionTitle: 'Groupes et services',
-          collectionSubtitle: 'Suivez la vie de votre fraternite avant la liste des membres.',
-          addLabel: 'Ajouter un groupe',
-          metrics: [
-            { label: 'Membres', value: '42', icon: 'bi-people' },
-            { label: 'Responsables', value: '6', icon: 'bi-person-check' },
-            { label: 'Groupes', value: '3', icon: 'bi-collection' },
-            { label: 'Activites', value: '8', icon: 'bi-calendar-event' }
-          ],
-          items: [
-            {
-              name: 'Jeunes Serviteurs',
-              location: 'Groupe de service',
-              image: 'assets/home/cmda-community-hero.png',
-              description: 'Service des jeunes et accueil.',
-              metrics: ['14 membres', '2 responsables', 'Actif'],
-              actionLabel: 'Statique MVP'
-            },
-            {
-              name: 'Chorale',
-              location: 'Groupe liturgique',
-              image: 'assets/home/region-city.svg',
-              description: 'Animation des temps de priere.',
-              metrics: ['11 membres', '1 responsable', 'Actif'],
-              actionLabel: 'Statique MVP'
-            },
-            {
-              name: 'Catechese',
-              location: 'Formation',
-              image: 'assets/home/region-alps.svg',
-              description: 'Transmission et accompagnement.',
-              metrics: ['17 membres', '3 responsables', 'Actif'],
-              actionLabel: 'Statique MVP'
-            }
-          ],
-          events: [
-            { date: '12 MAR', title: 'Reunion de fraternite', subtitle: 'Salle paroissiale' },
-            { date: '19 MAR', title: 'Temps de priere', subtitle: 'Chapelle Saint Paul' }
-          ],
-          documents: [
-            { date: 'PDF', title: 'Charte de la fraternite.pdf', subtitle: 'PDF - 1.2 Mo' },
-            { date: 'PDF', title: 'Planning des activites.pdf', subtitle: 'PDF - 640 Ko' }
-          ]
+          mode: 'fraternity'
         }
       },
       { path: 'members', component: ListComponent },

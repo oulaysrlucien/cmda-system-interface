@@ -128,6 +128,10 @@ Livrables :
 - routes reduites au mode ou aux informations minimales.
 - composants alimentes par services API.
 
+Etat : termine.
+
+Documentation : `roadmap_r6_e9_nettoyage_donnees_statiques.md`.
+
 ### R6-E10 - Tests et validation metier
 
 Valider les parcours reels :
