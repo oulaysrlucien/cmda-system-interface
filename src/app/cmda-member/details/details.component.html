@@ -224,6 +224,15 @@
 
 <ng-template #loadingState>
   <section class="member-detail member-detail--loading">
-    <p>{{ isLoading ? 'Chargement de la fiche membre...' : 'Aucune fiche membre disponible.' }}</p>
+    <p *ngIf="isLoading">Chargement securise de la fiche membre...</p>
+
+    <div *ngIf="!isLoading">
+      <h1>{{ loadErrorTitle || 'Aucune fiche membre disponible' }}</h1>
+      <p>{{ loadErrorMessage || 'La fiche demandee ne peut pas etre affichee.' }}</p>
+      <button type="button" class="member-detail__back" (click)="goBack()">
+        <i class="bi bi-arrow-left"></i>
+        <span>Retour aux membres</span>
+      </button>
+    </div>
   </section>
 </ng-template>

@@ -238,6 +238,10 @@
   padding: 2rem;
 }
 
+.member-detail--loading h1 {
+  margin: 0 0 0.5rem;
+}
+
 @media (max-width: 980px) {
   .member-detail__header,
   .member-detail__sheet {

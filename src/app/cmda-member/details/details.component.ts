@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from '../../shared/services/notification.service';
 import { CmdaMember } from '../models/cmda-member.model';
@@ -15,6 +16,8 @@ export class DetailsComponent implements OnInit {
   isLoading = true;
   isEditMode = false;
   isSaving = false;
+  loadErrorTitle = '';
+  loadErrorMessage = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -24,16 +27,6 @@ export class DetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const stateMember = history.state?.member as CmdaMember | undefined;
-
-    if (stateMember) {
-      this.member = stateMember;
-      if (this.route.snapshot.queryParamMap.get('edit') === 'true') {
-        this.enableEdit();
-      }
-      this.isLoading = false;
-    }
-
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
     if (!id) {
@@ -45,6 +38,8 @@ export class DetailsComponent implements OnInit {
     this.cmdaMemberService.getMemberById(id).subscribe(
       member => {
         this.member = member;
+        this.loadErrorTitle = '';
+        this.loadErrorMessage = '';
         if (this.route.snapshot.queryParamMap.get('edit') === 'true') {
           this.enableEdit();
         }
@@ -52,11 +47,11 @@ export class DetailsComponent implements OnInit {
       },
       error => {
         console.error('Erreur lors du chargement de la fiche membre', error);
+        this.member = null;
+        this.editableMember = null;
+        this.isEditMode = false;
         this.isLoading = false;
-
-        if (!this.member) {
-          this.notificationService.showError('Impossible de charger la fiche membre.');
-        }
+        this.setLoadError(error);
       }
     );
   }
@@ -122,9 +117,42 @@ export class DetailsComponent implements OnInit {
       error => {
         console.error('Erreur lors de la mise a jour du membre', error);
         this.isSaving = false;
-        this.notificationService.showError('Une erreur est survenue lors de la mise a jour du membre.');
+        this.notificationService.showError(this.getSaveErrorMessage(error));
       }
     );
+  }
+
+  private setLoadError(error: unknown): void {
+    const status = error instanceof HttpErrorResponse ? error.status : 0;
+
+    if (status === 403) {
+      this.loadErrorTitle = 'Acces refuse';
+      this.loadErrorMessage = 'Votre role ne permet pas de consulter cette fiche membre.';
+      return;
+    }
+
+    if (status === 404) {
+      this.loadErrorTitle = 'Fiche introuvable';
+      this.loadErrorMessage = 'Ce membre n existe pas ou ne fait pas partie de votre perimetre.';
+      return;
+    }
+
+    this.loadErrorTitle = 'Chargement impossible';
+    this.loadErrorMessage = 'Une erreur est survenue lors du chargement securise de la fiche membre.';
+  }
+
+  private getSaveErrorMessage(error: unknown): string {
+    const status = error instanceof HttpErrorResponse ? error.status : 0;
+
+    if (status === 403) {
+      return 'Votre role ne permet pas de modifier cette fiche membre.';
+    }
+
+    if (status === 404) {
+      return 'Ce membre n existe pas ou ne fait plus partie de votre perimetre.';
+    }
+
+    return 'Une erreur est survenue lors de la mise a jour du membre.';
   }
 
   get fullName(): string {

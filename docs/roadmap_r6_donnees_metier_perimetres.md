@@ -115,6 +115,10 @@ Livrables :
 - `/app/members/:id` charge uniquement un membre visible par l'utilisateur connecte.
 - gestion propre des cas hors perimetre.
 
+Etat : termine.
+
+Documentation : `roadmap_r6_e8_fiche_detail_membre_securisee.md`.
+
 ### R6-E9 - Nettoyage des donnees statiques
 
 Retirer progressivement les donnees mockees de `app-routing.module.ts`.
