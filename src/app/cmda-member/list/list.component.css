@@ -68,7 +68,7 @@
   align-items: end;
   display: grid;
   gap: 0.75rem;
-  grid-template-columns: minmax(14rem, 1fr) minmax(12rem, 0.35fr) auto;
+  grid-template-columns: minmax(14rem, 1fr) minmax(12rem, 0.35fr) auto auto;
   margin-bottom: 1rem;
 }
 
@@ -99,6 +99,21 @@
   background: #fff;
   border: 1px solid rgba(31, 22, 61, 0.18);
   color: #210a55;
+}
+
+.member-list__filters button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.member-list__state {
+  background: #faf9fc;
+  border: 1px solid rgba(31, 22, 61, 0.08);
+  border-radius: 8px;
+  color: #210a55;
+  font-weight: 800;
+  margin: 0 0 1rem;
+  padding: 0.85rem 1rem;
 }
 
 .member-table {

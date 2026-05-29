@@ -102,6 +102,10 @@ Livrables :
 - `PROVINCIAL`, `REGIONAL`, `BERGER` utilisent `/members`.
 - recherche et filtres restent dans le perimetre backend.
 
+Etat : termine.
+
+Documentation : `roadmap_r6_e7_liste_membres_perimetre.md`.
+
 ### R6-E8 - Fiche detail membre securisee
 
 Verifier que la fiche detail respecte le perimetre backend.

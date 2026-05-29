@@ -3,7 +3,7 @@
     <div>
       <p>Liste des membres</p>
       <h1>Membres de la communaute</h1>
-      <span>Une lecture claire, peu de colonnes, et un acces rapide aux details.</span>
+      <span>{{ scopeLabel }} - {{ totalElements }} membre(s) visible(s)</span>
     </div>
     <button type="button" (click)="goToAddMember()">
       <i class="bi bi-plus-lg"></i>
@@ -15,7 +15,7 @@
     <div class="member-list__filters">
       <label>
         <span>Recherche</span>
-        <input type="search" [(ngModel)]="searchTerm" placeholder="Rechercher un membre...">
+        <input type="search" [(ngModel)]="searchTerm" (keyup.enter)="applyFilters()" placeholder="Rechercher un membre...">
       </label>
       <label>
         <span>Statut</span>
@@ -26,13 +26,22 @@
           <option value="ARCHIVED">Archive</option>
         </select>
       </label>
-      <button type="button">
+      <button type="button" (click)="applyFilters()" [disabled]="isLoading">
         <i class="bi bi-funnel"></i>
-        <span>Filtrer</span>
+        <span>{{ isLoading ? 'Chargement...' : 'Filtrer' }}</span>
+      </button>
+      <button type="button" *ngIf="hasActiveFilters" (click)="resetFilters()" [disabled]="isLoading">
+        <i class="bi bi-x-lg"></i>
+        <span>Reinitialiser</span>
       </button>
     </div>
 
-    <div class="member-table">
+    <p class="member-list__state" *ngIf="isLoading">Chargement des membres de votre perimetre...</p>
+    <p class="member-list__state" *ngIf="!isLoading && hasLoaded && !filteredMembers.length">
+      Aucun membre ne correspond a ce perimetre ou a ces filtres.
+    </p>
+
+    <div class="member-table" *ngIf="filteredMembers.length">
       <table>
         <thead>
           <tr>
@@ -78,7 +87,7 @@
       </table>
     </div>
 
-    <div class="member-cards">
+    <div class="member-cards" *ngIf="filteredMembers.length">
       <article *ngFor="let member of filteredMembers">
         <div class="member-card__top">
           <span class="member-avatar">{{ getMemberInitials(member) }}</span>

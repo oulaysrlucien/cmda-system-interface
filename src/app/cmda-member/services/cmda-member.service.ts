@@ -6,6 +6,7 @@ import { CmdaMember } from '../models/cmda-member.model';
 import { PageResponse } from '../models/page-response.model';
 
 export interface MemberSearchParams {
+  keyword?: string;
   fraternityId?: number;
   regionId?: number;
   provinceId?: number;
