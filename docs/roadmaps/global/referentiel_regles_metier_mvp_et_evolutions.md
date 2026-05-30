@@ -314,4 +314,4 @@ Evolutions recommandees :
 
 ## Etat
 
-Referentiel metier initial valide. Les garde-fous backend R7-E3, les services Angular R7-E5, l'ecran ADMIN Structures R7-E6 et l'espace Provincial R7-E7 sont implementes ; la suite est R7-E8 cote Regional.
+Referentiel metier initial valide. Les garde-fous backend R7-E3, les services Angular R7-E5, l'ecran ADMIN Structures R7-E6, l'espace Provincial R7-E7 et l'espace Regional R7-E8 sont implementes ; la suite est R7-E9 cote ADMIN.

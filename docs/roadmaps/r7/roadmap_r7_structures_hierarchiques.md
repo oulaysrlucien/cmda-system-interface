@@ -140,6 +140,39 @@ Livrables :
 - acces a l'espace fraternite.
 - absence de boutons CRUD structures.
 
+Etat : termine.
+
+Documentation : `roadmap_r7_e8_espace_regional_fraternites.md`.
+
+### R7-E8+ - Separation Espace personnel / Mon compte
+
+Separer la fiche de mission communautaire de l'ecran technique de compte pour tous les roles.
+
+Livrables :
+
+- espace personnel dynamique sur `/api/me/scope`.
+- ecran compte distinct avec session JWT.
+- fonctions de securite futures clairement identifiees.
+
+Etat : termine.
+
+Documentation : `roadmap_r7_e8_plus_espace_personnel_mon_compte.md`.
+
+### R7-E8++ - Securite du compte utilisateur
+
+Permettre a l'utilisateur connecte de modifier son mot de passe depuis `Mon compte`.
+
+Livrables :
+
+- endpoint securise `PATCH /api/me/password`.
+- verification de l'ancien mot de passe.
+- formulaire responsive.
+- renouvellement de session ou deconnexion.
+
+Etat : planifie, implementation reportee.
+
+Documentation : `roadmap_r7_e8_plus_plus_securite_compte_mot_de_passe.md`.
+
 ### R7-E9 - Formulaires responsive
 
 Construire les formulaires de creation/modification.

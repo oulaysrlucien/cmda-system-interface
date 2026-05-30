@@ -13,7 +13,7 @@ Ce fichier sert de tableau de progression officiel. Une roadmap est cochee uniqu
 | [x] | R4 | Validee | Gestion des erreurs | `../r4/roadmap_r4_gestion_erreurs.md` |
 | [x] | R5 | Validee V0 | Architecture navigation et espaces utilisateurs | `../r5/roadmap_r5_architecture_navigation.md` |
 | [ ] | R6 | En cours - E9 terminee | Donnees metier et perimetres utilisateurs | `../r6/roadmap_r6_donnees_metier_perimetres.md` |
-| [ ] | R7 | En cours - E7 terminee | CRUD structures hierarchiques | `../r7/roadmap_r7_structures_hierarchiques.md` |
+| [ ] | R7 | En cours - E8 terminee | CRUD structures hierarchiques | `../r7/roadmap_r7_structures_hierarchiques.md` |
 | [ ] | R8 | A venir | Membres avances | A creer |
 | [ ] | R9 | A venir | Tableaux de bord et statistiques | A creer |
 | [ ] | R10 | A venir | Qualite, accessibilite, performance | A creer |
@@ -63,7 +63,9 @@ R6 doit brancher les ecrans R5 sur les vraies donnees metier et verrouiller les 
 - [x] R7-E5 - Services Angular des structures.
 - [x] R7-E6 - Ecran ADMIN Structures.
 - [x] R7-E7 - Consultation des regions cote Provincial.
-- [ ] R7-E8 - Consultation des fraternites cote Regional.
+- [x] R7-E8 - Consultation des fraternites cote Regional.
+- [x] R7-E8+ - Separation Espace personnel / Mon compte.
+- [ ] R7-E8++ - Securite du compte utilisateur : modification du mot de passe.
 - [ ] R7-E9 - Formulaires responsive.
 - [ ] R7-E10 - Archivage, reactivation et garde-fous.
 - [ ] R7-E11 - Tests et documentation.

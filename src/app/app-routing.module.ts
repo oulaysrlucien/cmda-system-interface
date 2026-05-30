@@ -22,6 +22,7 @@ import { RoleDashboardComponent } from './shared/role-dashboard/role-dashboard.c
 import { PersonalSpaceComponent } from './shared/personal-space/personal-space.component';
 import { HierarchySpaceComponent } from './shared/hierarchy-space/hierarchy-space.component';
 import { AdminStructuresComponent } from './shared/admin-structures/admin-structures.component';
+import { AccountComponent } from './shared/account/account.component';
 
 const routes: Routes = [
   {
@@ -195,7 +196,7 @@ const routes: Routes = [
       { path: 'members/:id/edit', component: EditComponent },
       { path: 'members/:id/delete', component: DeleteComponent },
       { path: 'personal-space', component: PersonalSpaceComponent },
-      { path: 'account', component: PersonalSpaceComponent },
+      { path: 'account', component: AccountComponent },
       {
         path: 'users',
         component: AdminUserManagementComponent,

@@ -118,6 +118,16 @@ export class HierarchySpaceComponent implements OnInit {
     return this.authService.hasRole('ADMIN');
   }
 
+  get showRegionMembersShortcut(): boolean {
+    return this.mode === 'region' && this.authService.hasRole('REGIONAL');
+  }
+
+  get emptyCollectionLabel(): string {
+    if (this.mode === 'province') return 'Aucune region active dans ce perimetre.';
+    if (this.mode === 'region') return 'Aucune fraternite active dans ce perimetre.';
+    return 'Aucun groupe ou service disponible.';
+  }
+
   get loadingLabel(): string {
     if (this.mode === 'province') return 'Chargement des regions de la province...';
     if (this.mode === 'region') return 'Chargement des fraternites de la region...';
@@ -240,6 +250,7 @@ export class HierarchySpaceComponent implements OnInit {
           ...this.viewModel,
           eyebrow: selectedRegion?.name || scope.region?.name || this.viewModel.eyebrow,
           title: selectedRegion?.name || scope.region?.name || this.viewModel.title,
+          collectionSubtitle: 'Consultez les fraternites rattachees a votre region.',
           managerName: scope.username || this.viewModel.managerName,
           metrics: [
             { label: 'Fraternites actives', value: String(fraternities.length), icon: 'bi-house-heart' },

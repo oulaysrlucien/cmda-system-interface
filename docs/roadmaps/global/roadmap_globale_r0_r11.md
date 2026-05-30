@@ -17,7 +17,7 @@ Le suivi coche / non coche est maintenu dans `roadmap_progress_r0_r11.md`.
 | R4 | Termine | Gestion des erreurs | Centraliser les erreurs, ajouter pages 401/403/404 et notifications UX. |
 | R5 | V0 terminee | Architecture navigation | Layout public, layout connecte, accueil, espaces par role, hierarchie et fiche membre. |
 | R6 | En cours - implementation E1 a E9 terminee | Donnees metier et perimetres | Brancher les espaces R5 sur les vraies donnees API selon Province, Region, Fraternite et role. |
-| R7 | En cours - E7 terminee | CRUD structures | Finaliser CRUD Province, Region, Fraternite et relations hierarchiques. |
+| R7 | En cours - E8 terminee | CRUD structures | Finaliser CRUD Province, Region, Fraternite et relations hierarchiques. |
 | R8 | A venir | Membres avances | Photo, fiche complete, historique, groupes/services, imports/exports consolides. |
 | R9 | A venir | Tableaux de bord et statistiques | Indicateurs reels, graphiques, activites, documents et evenements. |
 | R10 | A venir | Qualite, accessibilite, performance | Tests, responsive final, accessibilite, budgets, optimisation bundle. |
@@ -47,6 +47,9 @@ Le suivi coche / non coche est maintenu dans `roadmap_progress_r0_r11.md`.
 - `../r7/roadmap_r7_e5_services_angular_structures.md`
 - `../r7/roadmap_r7_e6_ecran_admin_structures.md`
 - `../r7/roadmap_r7_e7_espace_provincial_regions.md`
+- `../r7/roadmap_r7_e8_espace_regional_fraternites.md`
+- `../r7/roadmap_r7_e8_plus_espace_personnel_mon_compte.md`
+- `../r7/roadmap_r7_e8_plus_plus_securite_compte_mot_de_passe.md`
 
 ## R5 - V0 terminee
 
@@ -63,4 +66,4 @@ R5 a pose l'architecture visible de l'application :
 
 ## Suite immediate
 
-La suite logique est R7-E8 : consolider la consultation des fraternites cote Regional, tout en gardant R6-E10 pour les tests de validation metier.
+La suite logique est R7-E9 : construire les formulaires responsive ADMIN des structures, tout en gardant R6-E10 pour les tests de validation metier.

@@ -16,6 +16,7 @@ import { RoleDashboardComponent } from './role-dashboard/role-dashboard.componen
 import { PersonalSpaceComponent } from './personal-space/personal-space.component';
 import { HierarchySpaceComponent } from './hierarchy-space/hierarchy-space.component';
 import { AdminStructuresComponent } from './admin-structures/admin-structures.component';
+import { AccountComponent } from './account/account.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { AdminStructuresComponent } from './admin-structures/admin-structures.co
     RoleDashboardComponent,
     PersonalSpaceComponent,
     HierarchySpaceComponent,
-    AdminStructuresComponent
+    AdminStructuresComponent,
+    AccountComponent
   ],
   imports: [
     CommonModule,
@@ -54,7 +56,8 @@ import { AdminStructuresComponent } from './admin-structures/admin-structures.co
     RoleDashboardComponent,
     PersonalSpaceComponent,
     HierarchySpaceComponent,
-    AdminStructuresComponent
+    AdminStructuresComponent,
+    AccountComponent
   ]
 })
 export class SharedModule { }

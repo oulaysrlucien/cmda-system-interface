@@ -27,6 +27,14 @@ export class AppHeaderComponent {
       return 'Gestion des utilisateurs';
     }
 
+    if (url.includes('/app/personal-space')) {
+      return 'Espace personnel';
+    }
+
+    if (url.includes('/app/account')) {
+      return 'Mon compte';
+    }
+
     if (url.includes('/app/admin/structures')) {
       return 'Gestion des structures';
     }

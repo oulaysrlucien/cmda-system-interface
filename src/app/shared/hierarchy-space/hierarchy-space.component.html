@@ -41,10 +41,16 @@
           <p *ngIf="isLoading">{{ loadingLabel }}</p>
           <p *ngIf="loadError" class="text-danger">{{ loadError }}</p>
         </div>
-        <button *ngIf="canManageStructures" type="button">
-          <i class="bi bi-plus"></i>
-          <span>{{ addLabel }}</span>
-        </button>
+        <div class="d-flex flex-wrap gap-2">
+          <a *ngIf="showRegionMembersShortcut" routerLink="/app/members" class="btn btn-outline-primary">
+            <i class="bi bi-people"></i>
+            <span>Voir les membres</span>
+          </a>
+          <button *ngIf="canManageStructures" type="button">
+            <i class="bi bi-plus"></i>
+            <span>{{ addLabel }}</span>
+          </button>
+        </div>
       </div>
 
       <div class="hierarchy-cards">
@@ -68,6 +74,9 @@
             </ng-template>
           </div>
         </article>
+        <p *ngIf="!isLoading && !items.length" class="text-muted mb-0">
+          {{ emptyCollectionLabel }}
+        </p>
       </div>
     </main>
 

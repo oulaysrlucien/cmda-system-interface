@@ -1,0 +1,10 @@
+<section class="account">
+  <header><div><p>Mon compte</p><h1>Parametres de connexion</h1><span>Identite, session et securite</span></div><i class="bi bi-shield-lock"></i></header>
+  <div class="account__grid">
+    <section><h2>Identite de connexion</h2><dl><div><dt>Identifiant</dt><dd>{{ username }}</dd></div><div><dt>Role</dt><dd>{{ roleLabel }}</dd></div></dl></section>
+    <section><h2>Session active</h2><dl><div><dt>Etat</dt><dd><span class="account__status">Connectee</span></dd></div><div><dt>Expiration</dt><dd>{{ sessionExpiration }}</dd></div></dl></section>
+  </div>
+  <section class="account__security"><h2>Securite</h2><p>La modification autonome du mot de passe sera disponible apres ajout de l endpoint serveur securise.</p><button type="button" disabled><i class="bi bi-key"></i> Modifier mon mot de passe</button></section>
+  <section class="account__preferences"><h2>Preferences</h2><label><input type="checkbox" disabled> Recevoir les notifications applicatives</label><label><input type="checkbox" disabled> Activer les alertes de suivi</label><small>Preferences prevues pour une prochaine iteration.</small></section>
+  <footer><button type="button" (click)="logout()"><i class="bi bi-box-arrow-right"></i> Me deconnecter</button></footer>
+</section>

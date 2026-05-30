@@ -1,6 +1,33 @@
 <section class="personal-space">
-  <p>Espace personnel</p>
-  <h1>{{ username }}</h1>
-  <span>{{ roles }}</span>
-  <p class="personal-space__note">Cette page recevra les informations de compte et preferences utilisateur.</p>
+  <header>
+    <div><p>Espace personnel</p><h1>{{ username }}</h1><span>{{ roleLabel }}</span></div>
+    <i class="bi bi-person-badge" aria-hidden="true"></i>
+  </header>
+
+  <p *ngIf="loading" class="personal-space__state">Chargement de votre mission...</p>
+  <p *ngIf="loadError" class="personal-space__state personal-space__state--error">{{ loadError }}</p>
+
+  <ng-container *ngIf="scope && !loading">
+    <div class="personal-space__mission">
+      <div><p>Votre mission</p><h2>{{ scopeLabel }}</h2><span>{{ missionLabel }}</span></div>
+      <a [routerLink]="primaryRoute"><i class="bi bi-arrow-right-circle"></i> Ouvrir mon espace metier</a>
+    </div>
+
+    <div class="personal-space__metrics">
+      <article><i class="bi bi-building"></i><strong>{{ scope.metrics.provincesCount }}</strong><span>Provinces</span></article>
+      <article><i class="bi bi-geo-alt"></i><strong>{{ scope.metrics.regionsCount }}</strong><span>Regions</span></article>
+      <article><i class="bi bi-house-heart"></i><strong>{{ scope.metrics.fraternitiesCount }}</strong><span>Fraternites</span></article>
+      <article><i class="bi bi-people"></i><strong>{{ scope.metrics.membersCount }}</strong><span>Membres visibles</span></article>
+    </div>
+
+    <div class="personal-space__details">
+      <h2>Perimetre communautaire</h2>
+      <dl>
+        <div><dt>Province</dt><dd>{{ scope.province?.name || 'Non rattachee' }}</dd></div>
+        <div><dt>Region</dt><dd>{{ scope.region?.name || 'Non rattachee' }}</dd></div>
+        <div><dt>Fraternite</dt><dd>{{ scope.fraternity?.name || 'Non rattachee' }}</dd></div>
+        <div><dt>Niveau d acces</dt><dd>{{ scope.scopeLevel }}</dd></div>
+      </dl>
+    </div>
+  </ng-container>
 </section>

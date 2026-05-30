@@ -48,18 +48,6 @@ export class SidebarComponent {
   }
 
   get primarySpaceLabel(): string {
-    if (this.hasRole('PROVINCIAL')) {
-      return 'Mes regions';
-    }
-
-    if (this.hasRole('REGIONAL')) {
-      return 'Mes fraternites';
-    }
-
-    if (this.hasRole('BERGER')) {
-      return 'Ma fraternite';
-    }
-
     return 'Tableau de bord';
   }
 
@@ -68,7 +56,7 @@ export class SidebarComponent {
   }
 
   showStructureMenu(): boolean {
-    return this.hasRole('ADMIN') || this.hasRole('PROVINCIAL') || this.hasRole('REGIONAL');
+    return this.hasRole('ADMIN') || this.hasRole('PROVINCIAL');
   }
 
   showFraternityMenu(): boolean {

@@ -34,11 +34,11 @@ export const HIERARCHY_SPACE_DEFAULTS: Record<HierarchySpaceViewModel['mode'], H
     eyebrow: 'Region rattachee',
     title: 'Region Saint Jean',
     subtitle: 'Ensemble, marchons a la suite du Christ.',
-    heroImage: 'assets/home/region-alps.svg',
+    heroImage: 'assets/home/region-alps-photo.png',
     managerTitle: 'Responsable regional',
     managerName: 'Fr. Jean-Baptiste N Guessan',
     collectionTitle: 'Mes fraternites',
-    collectionSubtitle: 'Gerez et suivez les fraternites de votre region.',
+    collectionSubtitle: 'Consultez les fraternites rattachees a votre region.',
     addLabel: 'Ajouter une fraternite',
     metrics: [
       { label: 'Fraternites actives', value: '0', icon: 'bi-house-heart' },
