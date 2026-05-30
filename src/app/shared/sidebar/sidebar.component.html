@@ -37,21 +37,18 @@
     <p class="sidebar__section-title">Perimetre</p>
     <ul class="sidebar__nav">
       <li *ngIf="showStructureMenu()">
-        <a *ngIf="hasRole('ADMIN'); else disabledStructures" routerLink="/app/admin/structures" routerLinkActive="is-active" (click)="navigate.emit()">
+        <a [routerLink]="structuresRoute" routerLinkActive="is-active" (click)="navigate.emit()">
           <i class="bi bi-diagram-3"></i>
-          <span>Structures</span>
+          <span>{{ structuresLabel }}</span>
         </a>
-        <ng-template #disabledStructures>
-          <span class="sidebar__item sidebar__item--disabled">
-            <i class="bi bi-diagram-3"></i>
-            <span>Structures</span>
-          </span>
-        </ng-template>
       </li>
       <li *ngIf="showFraternityMenu()">
-        <span class="sidebar__item sidebar__item--disabled">
+        <a *ngIf="!hasRole('ADMIN')" [routerLink]="fraternitiesRoute" routerLinkActive="is-active" (click)="navigate.emit()">
           <i class="bi bi-house-heart"></i>
           <span>Fraternites</span>
+        </a>
+        <span *ngIf="hasRole('ADMIN')" class="sidebar__item sidebar__item--disabled">
+          <i class="bi bi-house-heart"></i><span>Fraternites</span>
         </span>
       </li>
     </ul>

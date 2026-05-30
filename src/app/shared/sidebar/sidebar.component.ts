@@ -75,6 +75,23 @@ export class SidebarComponent {
     return this.hasRole('ADMIN') || this.hasRole('PROVINCIAL') || this.hasRole('REGIONAL') || this.hasRole('BERGER');
   }
 
+  get structuresRoute(): string {
+    if (this.hasRole('ADMIN')) return '/app/admin/structures';
+    if (this.hasRole('PROVINCIAL')) return '/app/provincial/province';
+    return '/app/regional/region';
+  }
+
+  get structuresLabel(): string {
+    if (this.hasRole('PROVINCIAL')) return 'Mes regions';
+    if (this.hasRole('REGIONAL')) return 'Mes fraternites';
+    return 'Structures';
+  }
+
+  get fraternitiesRoute(): string {
+    if (this.hasRole('PROVINCIAL') || this.hasRole('REGIONAL')) return '/app/regional/region';
+    return '/app/berger/fraternity';
+  }
+
   get scopeLabel(): string {
     if (this.hasRole('ADMIN')) {
       return 'Plateforme complete';

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { forkJoin, of, switchMap } from 'rxjs';
+import { forkJoin, map, of, switchMap } from 'rxjs';
 import { HierarchyItem, HierarchyMetric, HierarchySideItem, HierarchySpaceViewModel } from '../models/hierarchy-space.model';
 import { CurrentUserScope } from '../models/current-user-scope.model';
 import { Fraternity, Region } from '../models/organization-unit.model';
@@ -8,6 +8,7 @@ import { CurrentUserScopeService } from '../services/current-user-scope.service'
 import { FraternityService } from '../services/fraternity.service';
 import { RegionService } from '../services/region.service';
 import { HIERARCHY_SPACE_DEFAULTS } from './hierarchy-space.defaults';
+import { AuthService } from '../../user-management/services/auth.service';
 
 @Component({
   selector: 'app-hierarchy-space',
@@ -35,7 +36,8 @@ export class HierarchySpaceComponent implements OnInit {
     private route: ActivatedRoute,
     private currentUserScopeService: CurrentUserScopeService,
     private regionService: RegionService,
-    private fraternityService: FraternityService
+    private fraternityService: FraternityService,
+    private authService: AuthService
   ) {
     this.viewModel = this.buildViewModelFromRoute();
   }
@@ -112,6 +114,16 @@ export class HierarchySpaceComponent implements OnInit {
     return this.viewModel.documents;
   }
 
+  get canManageStructures(): boolean {
+    return this.authService.hasRole('ADMIN');
+  }
+
+  get loadingLabel(): string {
+    if (this.mode === 'province') return 'Chargement des regions de la province...';
+    if (this.mode === 'region') return 'Chargement des fraternites de la region...';
+    return 'Chargement de la fraternite...';
+  }
+
   private loadProvinceSpace(): void {
     this.isLoading = true;
     this.loadError = '';
@@ -119,11 +131,26 @@ export class HierarchySpaceComponent implements OnInit {
     forkJoin({
       scope: this.currentUserScopeService.getScope(),
       regions: this.regionService.getCurrentUserProvinceRegions()
-    }).subscribe({
+    }).pipe(
+      switchMap(({ scope, regions }) => {
+        if (!regions.length) {
+          return of({ scope, regions });
+        }
+
+        return forkJoin(
+          regions.map(region =>
+            this.fraternityService.getScopedRegionFraternities(region.id).pipe(
+              map(fraternities => ({ ...region, fraternities }))
+            )
+          )
+        ).pipe(map(enrichedRegions => ({ scope, regions: enrichedRegions })));
+      })
+    ).subscribe({
       next: ({ scope, regions }) => {
         this.viewModel = {
           ...this.viewModel,
           eyebrow: scope.province?.name || this.viewModel.eyebrow,
+          title: `Bienvenue, ${scope.username}`,
           managerName: scope.username || this.viewModel.managerName,
           metrics: [
             { label: 'Regions actives', value: String(scope.metrics.regionsCount), icon: 'bi-geo-alt' },

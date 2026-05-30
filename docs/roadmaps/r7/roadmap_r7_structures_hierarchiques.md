@@ -126,6 +126,10 @@ Livrables :
 - acces aux fraternites d'une region.
 - absence de boutons CRUD structures.
 
+Etat : termine.
+
+Documentation : `roadmap_r7_e7_espace_provincial_regions.md`.
+
 ### R7-E8 - Consultation des fraternites cote Regional
 
 Permettre au Regional de consulter les fraternites de sa region sans administrer la structure.

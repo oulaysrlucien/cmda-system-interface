@@ -38,10 +38,10 @@
         <div>
           <h2>{{ collectionTitle }}</h2>
           <p>{{ collectionSubtitle }}</p>
-          <p *ngIf="isLoading">Chargement des donnees de la province...</p>
-          <p *ngIf="loadError">{{ loadError }}</p>
+          <p *ngIf="isLoading">{{ loadingLabel }}</p>
+          <p *ngIf="loadError" class="text-danger">{{ loadError }}</p>
         </div>
-        <button type="button">
+        <button *ngIf="canManageStructures" type="button">
           <i class="bi bi-plus"></i>
           <span>{{ addLabel }}</span>
         </button>
@@ -51,7 +51,7 @@
         <article class="hierarchy-card" *ngFor="let item of items">
           <div class="hierarchy-card__media">
             <img [src]="item.image" [alt]="item.name">
-            <button type="button" aria-label="Options"><i class="bi bi-three-dots-vertical"></i></button>
+            <button *ngIf="canManageStructures" type="button" aria-label="Options"><i class="bi bi-three-dots-vertical"></i></button>
           </div>
           <div class="hierarchy-card__body">
             <h3>{{ item.name }}</h3>

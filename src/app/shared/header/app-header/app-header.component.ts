@@ -31,6 +31,18 @@ export class AppHeaderComponent {
       return 'Gestion des structures';
     }
 
+    if (url.includes('/app/provincial/province')) {
+      return 'Espace provincial';
+    }
+
+    if (url.includes('/app/regional/region')) {
+      return 'Espace regional';
+    }
+
+    if (url.includes('/app/berger/fraternity')) {
+      return 'Espace fraternite';
+    }
+
     if (url.includes('/app/members')) {
       return 'Gestion des membres';
     }
