@@ -1,0 +1,52 @@
+.users-admin{display:flex;flex-direction:column;gap:1rem}
+.users-admin__heading,.users-admin__filters,.users-admin__list{background:#fff;border:1px solid rgba(31,22,61,.1);border-radius:8px;padding:1rem}
+.users-admin__heading,.users-admin__actions,.users-admin__filters,.users-admin__pagination,.users-admin__pagination div,.row-actions,.user-cell{align-items:center;display:flex;gap:.65rem}
+.users-admin__heading,.users-admin__pagination{justify-content:space-between}
+.users-admin h1,.users-admin h2{color:#210a55;margin:0}
+.users-admin h1{font-size:1.35rem}
+.users-admin h2{font-size:1rem}
+.users-admin p{color:#74688d;margin:.25rem 0 0}
+.users-admin .btn-primary{background:#210a55;border-color:#210a55}
+.users-admin__stats{display:grid;gap:.75rem;grid-template-columns:repeat(5,minmax(0,1fr))}
+.users-admin__stats article{align-items:center;background:#fff;border:1px solid rgba(31,22,61,.1);border-radius:8px;display:flex;gap:.75rem;min-height:5rem;padding:.8rem}
+.users-admin__stats article>span,.user-cell span{align-items:center;background:#eee7f5;border-radius:50%;color:#210a55;display:inline-flex;flex:0 0 auto;height:2.4rem;justify-content:center;width:2.4rem}
+.users-admin__stats strong{color:#210a55;display:block;font-size:1.45rem;line-height:1}
+.users-admin__stats p{font-size:.82rem}
+.users-admin__filters label{align-items:center;border:1px solid #d8d2e0;border-radius:6px;display:flex;flex:1;gap:.45rem;padding:0 .65rem}
+.users-admin__filters input,.users-admin__filters select,.users-admin__filters label{min-height:2.65rem}
+.users-admin__filters input{border:0;outline:0;width:100%}
+.users-admin__filters select,.users-admin__modal select,.users-admin__modal input{border:1px solid #d8d2e0;border-radius:6px;padding:.55rem}
+.users-admin__list h2{margin-bottom:.75rem}
+.users-admin table{font-size:.86rem}
+.users-admin th{color:#5f547a;font-size:.72rem;text-transform:uppercase}
+.role-badge,.status-badge{border-radius:999px;display:inline-flex;font-size:.7rem;font-weight:800;padding:.25rem .5rem;text-transform:uppercase}
+.role-badge--admin,.role-badge--regional{background:#f8e9c7;color:#8a5600}
+.role-badge--provincial{background:#eee7f5;color:#6335a2}
+.role-badge--berger,.status-badge{background:#e2f3e4;color:#26743a}
+.status-badge--warning{background:#fff1d7;color:#8a5600}
+.row-actions button,.users-admin__pagination button,.users-admin__modal header button{background:#fff;border:1px solid #e2ddea;border-radius:50%;color:#6335a2;height:2rem;width:2rem}
+.row-actions button:disabled{opacity:.4}
+.row-actions__danger{color:#d94a4a!important}
+.users-admin__pagination{border-top:1px solid #eee9f2;padding-top:.65rem}
+.users-admin__pagination button.is-active{background:#210a55;color:#fff}
+.users-admin__state{color:#74688d;padding:1.25rem;text-align:center}
+.users-admin__modal-backdrop{background:rgba(18,8,45,.45);inset:0;position:fixed;z-index:40}
+.users-admin__modal{background:#fff;border-radius:8px;box-shadow:0 1rem 3rem rgba(18,8,45,.2);left:50%;max-width:38rem;padding:1rem;position:fixed;top:50%;transform:translate(-50%,-50%);width:calc(100% - 2rem);z-index:41}
+.users-admin__modal header,.users-admin__modal form,.users-admin__modal footer{display:flex;gap:.75rem}
+.users-admin__modal header{align-items:center;justify-content:space-between}
+.users-admin__modal header p{color:#e49400;font-size:.72rem;font-weight:900}
+.users-admin__modal form{flex-direction:column;margin-top:1rem}
+.users-admin__modal label{color:#210a55;display:flex;flex-direction:column;font-size:.82rem;font-weight:800;gap:.3rem}
+.users-admin__modal footer{justify-content:flex-end;margin-top:.4rem}
+@media(max-width:1050px){.users-admin__stats{grid-template-columns:repeat(3,1fr)}
+.users-admin__filters{flex-wrap:wrap}
+.users-admin__filters label{flex-basis:100%}
+}
+@media(max-width:680px){.users-admin__heading,.users-admin__actions{align-items:stretch;flex-direction:column}
+.users-admin__stats{grid-template-columns:1fr 1fr}
+.users-admin__actions .btn{width:100%}
+.users-admin__filters select{width:100%}
+.users-admin__list{padding:.75rem}
+.users-admin__pagination{align-items:flex-start;flex-direction:column}
+.row-actions{min-width:8.8rem}
+}

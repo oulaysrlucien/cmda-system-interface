@@ -1,55 +1,57 @@
-<div class="container">
-  <h2>Gestion des Utilisateurs</h2>
-  <form (ngSubmit)="onSubmit()" #userForm="ngForm">
-    <div class="form-group">
-      <label for="username">Nom d'utilisateur</label>
-      <input type="text" id="username" [(ngModel)]="user.username" name="username" required>
+<section class="users-admin">
+  <header class="users-admin__heading">
+    <div><h1>Gestion des utilisateurs</h1><p>Creer, modifier et gerer les comptes utilisateurs de la plateforme.</p></div>
+    <div class="users-admin__actions">
+      <button type="button" class="btn btn-outline-secondary" disabled title="Export utilisateurs a venir"><i class="bi bi-file-earmark-excel"></i> Exporter Excel</button>
+      <button type="button" class="btn btn-outline-secondary" disabled title="Export utilisateurs a venir"><i class="bi bi-file-earmark-pdf"></i> Exporter PDF</button>
+      <button type="button" class="btn btn-primary" (click)="openForm()"><i class="bi bi-plus-lg"></i> Ajouter un utilisateur</button>
     </div>
+  </header>
 
-    <div class="form-group">
-      <label for="password">Mot de passe</label>
-      <input type="password" id="password" [(ngModel)]="user.password" name="password" required>
+  <div class="users-admin__stats">
+    <article><span><i class="bi bi-people"></i></span><div><strong>{{ users.length }}</strong><p>Utilisateurs total</p></div></article>
+    <article><span><i class="bi bi-person-gear"></i></span><div><strong>{{ countByRole('ADMIN') }}</strong><p>Admins</p></div></article>
+    <article><span><i class="bi bi-building"></i></span><div><strong>{{ countByRole('PROVINCIAL') }}</strong><p>Provinciaux</p></div></article>
+    <article><span><i class="bi bi-geo-alt"></i></span><div><strong>{{ countByRole('REGIONAL') }}</strong><p>Regionaux</p></div></article>
+    <article><span><i class="bi bi-house-heart"></i></span><div><strong>{{ countByRole('BERGER') }}</strong><p>Bergers</p></div></article>
+  </div>
+
+  <div class="users-admin__filters">
+    <label><span class="visually-hidden">Rechercher</span><i class="bi bi-search"></i><input type="search" [(ngModel)]="searchTerm" (ngModelChange)="applyFilters()" placeholder="Rechercher un utilisateur..."></label>
+    <select [(ngModel)]="roleFilter" (ngModelChange)="applyFilters()" aria-label="Filtrer par role"><option value="">Tous les roles</option><option value="ADMIN">Admin</option><option value="PROVINCIAL">Provincial</option><option value="REGIONAL">Regional</option><option value="BERGER">Berger</option></select>
+    <select [(ngModel)]="provinceFilter" (ngModelChange)="applyFilters()" aria-label="Filtrer par province"><option value="">Toutes les provinces</option><option *ngFor="let province of provinces" [value]="province.id">{{ province.name }}</option></select>
+    <button type="button" class="btn btn-outline-secondary" (click)="resetFilters()"><i class="bi bi-arrow-clockwise"></i><span class="visually-hidden">Reinitialiser</span></button>
+  </div>
+
+  <section class="users-admin__list">
+    <h2>Liste des utilisateurs ({{ filteredUsers.length }})</h2>
+    <div *ngIf="loading" class="users-admin__state"><span class="spinner-border spinner-border-sm"></span> Chargement...</div>
+    <div *ngIf="!loading" class="table-responsive">
+      <table class="table align-middle"><thead><tr><th>Utilisateur</th><th>Role</th><th>Perimetre / Affectation</th><th>Statut</th><th>Actions</th></tr></thead><tbody>
+        <tr *ngFor="let currentUser of paginatedUsers">
+          <td><div class="user-cell"><span>{{ getInitials(currentUser.username) }}</span><strong>{{ currentUser.username }}</strong></div></td>
+          <td><span class="role-badge" [ngClass]="getRoleClass(currentUser.role)">{{ getRoleLabel(currentUser.role) }}</span></td>
+          <td>{{ getAssignment(currentUser) }}</td>
+          <td><span class="status-badge" [class.status-badge--warning]="currentUser.warningMessage">{{ currentUser.warningMessage ? 'A completer' : 'Actif' }}</span></td>
+          <td><div class="row-actions"><button type="button" title="Voir" disabled><i class="bi bi-eye"></i></button><button type="button" title="Modifier" (click)="editUser(currentUser)"><i class="bi bi-pencil"></i></button><button type="button" title="Verrouillage a venir" disabled><i class="bi bi-lock"></i></button><button type="button" title="Supprimer" class="row-actions__danger" (click)="deleteUser(currentUser.id)"><i class="bi bi-trash"></i></button></div></td>
+        </tr>
+        <tr *ngIf="paginatedUsers.length === 0"><td colspan="5" class="users-admin__state">Aucun utilisateur trouve.</td></tr>
+      </tbody></table>
     </div>
+    <footer class="users-admin__pagination" *ngIf="!loading"><span>{{ filteredUsers.length }} resultats</span><div><button type="button" [disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)"><i class="bi bi-chevron-left"></i></button><button *ngFor="let page of pageNumbers" type="button" [class.is-active]="page === currentPage" (click)="goToPage(page)">{{ page }}</button><button type="button" [disabled]="currentPage === totalPages" (click)="goToPage(currentPage + 1)"><i class="bi bi-chevron-right"></i></button></div></footer>
+  </section>
 
-    <div class="form-group">
-      <label for="role">Rôle</label>
-      <select id="role" [(ngModel)]="user.role" name="role" required>
-        <option value="PROVINCIAL">Provincial</option>
-        <option value="REGIONAL">Régional</option>
-        <option value="BERGER">Berger</option>
-        <option value="ADMIN">Admin</option>
-      </select>
-    </div>
-
-    <!--    -->
-    <div class="form-group" *ngIf="user.role === 'PROVINCIAL'">
-      <label for="provinceId">Province</label>
-      <select id="provinceId" [(ngModel)]="user.provinceId" name="provinceId" required>
-        <option *ngFor="let province of provinces" [value]="province.id">{{ province.name }}</option>
-      </select>
-    </div>
-
-    <button type="submit" [disabled]="!userForm.form.valid">Créer Utilisateur</button>
-  </form>
-
-  <h3>Liste des Utilisateurs</h3>
-  <table>
-    <thead>
-    <tr>
-      <th>Nom d'utilisateur</th>
-      <th>Rôle</th>
-      <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let user of users">
-      <td>{{ user.username }}</td>
-      <td>{{ user.role }}</td>
-      <td>
-        <button (click)="editUser(user)">Modifier</button>
-        <button (click)="deleteUser(user.id)">Supprimer</button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-</div>
+  <div class="users-admin__modal-backdrop" *ngIf="formOpen" (click)="closeForm()"></div>
+  <section class="users-admin__modal" *ngIf="formOpen" role="dialog" aria-modal="true" aria-labelledby="add-user-title">
+    <header><div><p>ESPACE ADMINISTRATEUR</p><h2 id="add-user-title">Ajouter un utilisateur</h2></div><button type="button" (click)="closeForm()" aria-label="Fermer"><i class="bi bi-x-lg"></i></button></header>
+    <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+      <label>Nom d'utilisateur<input type="text" [(ngModel)]="user.username" name="username" required></label>
+      <label>Mot de passe<input type="password" [(ngModel)]="user.password" name="password" required></label>
+      <label>Role<select [(ngModel)]="user.role" name="role" (ngModelChange)="onRoleChange()" required><option value="">Selectionner un role</option><option value="PROVINCIAL">Provincial</option><option value="REGIONAL">Regional</option><option value="BERGER">Berger</option></select></label>
+      <label *ngIf="user.role">Province<select [(ngModel)]="user.provinceId" name="provinceId" (ngModelChange)="onProvinceChange()" required><option [ngValue]="undefined">Selectionner une province</option><option *ngFor="let province of provinces" [ngValue]="province.id">{{ province.name }}</option></select></label>
+      <label *ngIf="user.role === 'REGIONAL' || user.role === 'BERGER'">Region<select [(ngModel)]="user.regionId" name="regionId" (ngModelChange)="onRegionChange()" required><option [ngValue]="undefined">Selectionner une region</option><option *ngFor="let region of availableRegions" [ngValue]="region.id">{{ region.name }}</option></select></label>
+      <label *ngIf="user.role === 'BERGER'">Fraternite<select [(ngModel)]="user.fraternityId" name="fraternityId" required><option [ngValue]="undefined">Selectionner une fraternite</option><option *ngFor="let fraternity of availableFraternities" [ngValue]="fraternity.id">{{ fraternity.name }}</option></select></label>
+      <footer><button type="button" class="btn btn-outline-secondary" (click)="closeForm()">Annuler</button><button type="submit" class="btn btn-primary" [disabled]="!userForm.form.valid">Enregistrer</button></footer>
+    </form>
+  </section>
+</section>

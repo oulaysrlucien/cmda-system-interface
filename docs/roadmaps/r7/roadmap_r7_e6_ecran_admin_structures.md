@@ -48,6 +48,18 @@ Un clic sur une province filtre les regions. Un clic sur une region filtre les f
 - titre du header adapte sur la route ADMIN Structures.
 - comportement responsive : compteurs et niveaux empiles sur les ecrans etroits.
 
+## Extension transverse : gestion des utilisateurs
+
+L'ecran ADMIN Utilisateurs a egalement ete aligne sur l'architecture MVP de reference :
+
+- compteurs dynamiques par role.
+- recherche, filtres par role et par province.
+- liste paginee et responsive.
+- affectation visible selon le role.
+- formulaire modal de creation avec selection progressive Province, Region et Fraternite.
+- creation d'un autre `ADMIN` volontairement absente du formulaire MVP.
+- exports utilisateurs, consultation detaillee et verrouillage affiches comme fonctionnalites a venir lorsque le backend les exposera.
+
 ## Limite volontaire
 
 Le bouton `Ajouter une structure` est visible mais desactive. Les formulaires responsive de creation et modification sont planifies en R7-E9.
@@ -64,6 +76,20 @@ Le bouton `Ajouter une structure` est visible mais desactive. Les formulaires re
 - `src/app/shared/shared.module.ts`
 - `src/app/shared/sidebar/sidebar.component.html`
 - `src/app/shared/header/app-header/app-header.component.ts`
+
+## Verification
+
+Build Angular valide :
+
+```text
+npm run build
+```
+
+Route front disponible :
+
+```text
+http://localhost:4200/app/admin/structures
+```
 
 ## Etat
 
