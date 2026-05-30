@@ -16,8 +16,8 @@ Le suivi coche / non coche est maintenu dans `roadmap_progress_r0_r11.md`.
 | R3 | Termine | Routes et roles | Proteger les routes Angular et filtrer les acces selon les roles. |
 | R4 | Termine | Gestion des erreurs | Centraliser les erreurs, ajouter pages 401/403/404 et notifications UX. |
 | R5 | V0 terminee | Architecture navigation | Layout public, layout connecte, accueil, espaces par role, hierarchie et fiche membre. |
-| R6 | Prochaine etape | Donnees metier et perimetres | Brancher les espaces R5 sur les vraies donnees API selon Province, Region, Fraternite et role. |
-| R7 | A venir | CRUD structures | Finaliser CRUD Province, Region, Fraternite et relations hierarchiques. |
+| R6 | En cours - implementation E1 a E9 terminee | Donnees metier et perimetres | Brancher les espaces R5 sur les vraies donnees API selon Province, Region, Fraternite et role. |
+| R7 | En cours - E3 terminee | CRUD structures | Finaliser CRUD Province, Region, Fraternite et relations hierarchiques. |
 | R8 | A venir | Membres avances | Photo, fiche complete, historique, groupes/services, imports/exports consolides. |
 | R9 | A venir | Tableaux de bord et statistiques | Indicateurs reels, graphiques, activites, documents et evenements. |
 | R10 | A venir | Qualite, accessibilite, performance | Tests, responsive final, accessibilite, budgets, optimisation bundle. |
@@ -25,20 +25,25 @@ Le suivi coche / non coche est maintenu dans `roadmap_progress_r0_r11.md`.
 
 ## Roadmaps documentees
 
-- `roadmap_r1_socle_api_front.md`
-- `roadmap_r2_auth_jwt.md`
-- `roadmap_r3_routes_roles.md`
-- `roadmap_r4_gestion_erreurs.md`
-- `roadmap_r5_architecture_navigation.md`
-- `roadmap_r5_e1_audit_navigation.md`
-- `roadmap_r5_e2_architecture_layouts.md`
-- `roadmap_r5_e3_accueil_public.md`
-- `roadmap_r5_e4_header_sidebar_connectes.md`
-- `roadmap_r5_e5_espaces_utilisateurs.md`
-- `roadmap_r5_e6_espaces_hierarchiques_listes.md`
-- `roadmap_r5_e7_fiche_detail_membre.md`
-- `roadmap_r6_donnees_metier_perimetres.md`
-- `roadmap_r6_e1_audit_donnees_metier.md`
+- `referentiel_regles_metier_mvp_et_evolutions.md`
+- `../r1/roadmap_r1_socle_api_front.md`
+- `../r2/roadmap_r2_auth_jwt.md`
+- `../r3/roadmap_r3_routes_roles.md`
+- `../r4/roadmap_r4_gestion_erreurs.md`
+- `../r5/roadmap_r5_architecture_navigation.md`
+- `../r5/roadmap_r5_e1_audit_navigation.md`
+- `../r5/roadmap_r5_e2_architecture_layouts.md`
+- `../r5/roadmap_r5_e3_accueil_public.md`
+- `../r5/roadmap_r5_e4_header_sidebar_connectes.md`
+- `../r5/roadmap_r5_e5_espaces_utilisateurs.md`
+- `../r5/roadmap_r5_e6_espaces_hierarchiques_listes.md`
+- `../r5/roadmap_r5_e7_fiche_detail_membre.md`
+- `../r6/roadmap_r6_donnees_metier_perimetres.md`
+- `../r6/roadmap_r6_e1_audit_donnees_metier.md`
+- `../r7/roadmap_r7_structures_hierarchiques.md`
+- `../r7/roadmap_r7_e1_audit_structures_existantes.md`
+- `../r7/roadmap_r7_e2_regles_metier_crud.md`
+- `../r7/roadmap_r7_e3_backend_crud_securise.md`
 
 ## R5 - V0 terminee
 
@@ -55,4 +60,4 @@ R5 a pose l'architecture visible de l'application :
 
 ## Suite immediate
 
-La suite logique est R6 : brancher les ecrans R5 sur les vraies donnees metier et verrouiller les perimetres d'acces.
+La suite logique est R7-E4 : completer les services Angular CRUD ADMIN, tout en gardant R6-E10 pour les tests de validation metier.
