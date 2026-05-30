@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { Fraternity } from '../models/organization-unit.model';
+import { Fraternity, FraternityPayload } from '../models/organization-unit.model';
 import { CurrentUserScopeService } from './current-user-scope.service';
 
 @Injectable({
@@ -26,6 +26,26 @@ export class FraternityService {
 
   getByRegion(regionId: number): Observable<Fraternity[]> {
     return this.http.get<Fraternity[]>(`${this.fraternitiesUrl}/region/${regionId}`);
+  }
+
+  getArchived(): Observable<Fraternity[]> {
+    return this.http.get<Fraternity[]>(`${this.fraternitiesUrl}/archived`);
+  }
+
+  create(payload: FraternityPayload): Observable<Fraternity> {
+    return this.http.post<Fraternity>(`${this.fraternitiesUrl}/create`, payload);
+  }
+
+  update(id: number, payload: FraternityPayload): Observable<Fraternity> {
+    return this.http.put<Fraternity>(`${this.fraternitiesUrl}/update/${id}`, payload);
+  }
+
+  archive(id: number): Observable<Fraternity> {
+    return this.http.patch<Fraternity>(`${this.fraternitiesUrl}/${id}/archive`, {});
+  }
+
+  restore(id: number): Observable<Fraternity> {
+    return this.http.patch<Fraternity>(`${this.fraternitiesUrl}/${id}/restore`, {});
   }
 
   getCurrentUserRegionFraternities(): Observable<Fraternity[]> {

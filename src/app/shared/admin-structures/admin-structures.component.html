@@ -1,0 +1,143 @@
+<section class="admin-structures">
+  <header class="admin-structures__hero">
+    <div>
+      <p>Espace administrateur</p>
+      <h1>Gerer les structures CMDA DEV</h1>
+      <span>Plateforme complete</span>
+    </div>
+    <div class="admin-structures__hero-icon" aria-hidden="true">
+      <i class="bi bi-diagram-3"></i>
+    </div>
+  </header>
+
+  <div class="admin-structures__stats" aria-label="Synthese des structures">
+    <article>
+      <span><i class="bi bi-building"></i></span>
+      <div><strong>{{ provinces.length }}</strong><p>Provinces actives</p></div>
+    </article>
+    <article>
+      <span><i class="bi bi-geo-alt"></i></span>
+      <div><strong>{{ regions.length }}</strong><p>Regions actives</p></div>
+    </article>
+    <article>
+      <span><i class="bi bi-house-heart"></i></span>
+      <div><strong>{{ fraternities.length }}</strong><p>Fraternites actives</p></div>
+    </article>
+    <article>
+      <span><i class="bi bi-archive"></i></span>
+      <div><strong>{{ archivedCount }}</strong><p>Structures archivees</p></div>
+    </article>
+  </div>
+
+  <div class="admin-structures__toolbar">
+    <div>
+      <h2>Organisation hierarchique</h2>
+      <p>Province, region et fraternite</p>
+    </div>
+    <div class="admin-structures__toolbar-actions">
+      <button *ngIf="selectedProvinceId !== null || selectedRegionId !== null" type="button" class="button button--quiet" (click)="clearSelection()">
+        <i class="bi bi-x-lg"></i>
+        <span>Effacer la selection</span>
+      </button>
+      <button type="button" class="button button--quiet" (click)="loadStructures()">
+        <i class="bi bi-arrow-clockwise"></i>
+        <span>Actualiser</span>
+      </button>
+      <button type="button" class="button button--primary" disabled>
+        <i class="bi bi-plus-lg"></i>
+        <span>Ajouter une structure</span>
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="admin-structures__state">
+    <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+    <span>Chargement des structures...</span>
+  </div>
+
+  <div *ngIf="!loading && errorMessage" class="admin-structures__state admin-structures__state--error">
+    <i class="bi bi-exclamation-triangle"></i>
+    <span>{{ errorMessage }}</span>
+    <button type="button" class="button button--quiet" (click)="loadStructures()">Reessayer</button>
+  </div>
+
+  <div *ngIf="!loading && !errorMessage" class="admin-structures__levels">
+    <section class="structure-level">
+      <header>
+        <span><i class="bi bi-building"></i></span>
+        <div><h2>Provinces</h2><p>{{ provinces.length }} actives</p></div>
+      </header>
+
+      <div class="structure-level__list">
+        <button
+          *ngFor="let province of provinces"
+          type="button"
+          class="structure-item"
+          [class.is-selected]="province.id === selectedProvinceId"
+          (click)="selectProvince(province.id)"
+        >
+          <span class="structure-item__icon"><i class="bi bi-building"></i></span>
+          <span class="structure-item__content">
+            <strong>{{ province.name }}</strong>
+            <small>{{ countRegions(province.id) }} regions · {{ countFraternitiesForProvince(province.id) }} fraternites</small>
+          </span>
+          <i class="bi bi-chevron-right"></i>
+        </button>
+
+        <p *ngIf="provinces.length === 0" class="structure-level__empty">Aucune province active.</p>
+      </div>
+    </section>
+
+    <section class="structure-level">
+      <header>
+        <span><i class="bi bi-geo-alt"></i></span>
+        <div>
+          <h2>Regions</h2>
+          <p>{{ selectedProvince ? selectedProvince.name : 'Toutes les provinces' }}</p>
+        </div>
+      </header>
+
+      <div class="structure-level__list">
+        <button
+          *ngFor="let region of visibleRegions"
+          type="button"
+          class="structure-item"
+          [class.is-selected]="region.id === selectedRegionId"
+          (click)="selectRegion(region.id)"
+        >
+          <span class="structure-item__icon structure-item__icon--gold"><i class="bi bi-geo-alt"></i></span>
+          <span class="structure-item__content">
+            <strong>{{ region.name }}</strong>
+            <small>{{ countFraternities(region.id) }} fraternites</small>
+          </span>
+          <i class="bi bi-chevron-right"></i>
+        </button>
+
+        <p *ngIf="visibleRegions.length === 0" class="structure-level__empty">Aucune region active dans ce perimetre.</p>
+      </div>
+    </section>
+
+    <section class="structure-level">
+      <header>
+        <span><i class="bi bi-house-heart"></i></span>
+        <div>
+          <h2>Fraternites</h2>
+          <p>{{ selectedRegion ? selectedRegion.name : 'Perimetre visible' }}</p>
+        </div>
+      </header>
+
+      <div class="structure-level__list">
+        <article *ngFor="let fraternity of visibleFraternities" class="structure-item structure-item--static">
+          <span class="structure-item__icon structure-item__icon--green"><i class="bi bi-house-heart"></i></span>
+          <span class="structure-item__content">
+            <strong>{{ fraternity.name }}</strong>
+            <small>{{ fraternity.description || 'Fraternite active' }}</small>
+          </span>
+          <i class="bi bi-check-circle"></i>
+        </article>
+
+        <p *ngIf="visibleFraternities.length === 0" class="structure-level__empty">Aucune fraternite active dans ce perimetre.</p>
+      </div>
+    </section>
+  </div>
+</section>

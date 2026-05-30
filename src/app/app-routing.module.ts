@@ -21,6 +21,7 @@ import { PublicPageComponent } from './shared/public-page/public-page.component'
 import { RoleDashboardComponent } from './shared/role-dashboard/role-dashboard.component';
 import { PersonalSpaceComponent } from './shared/personal-space/personal-space.component';
 import { HierarchySpaceComponent } from './shared/hierarchy-space/hierarchy-space.component';
+import { AdminStructuresComponent } from './shared/admin-structures/admin-structures.component';
 
 const routes: Routes = [
   {
@@ -84,9 +85,16 @@ const routes: Routes = [
           ],
           actions: [
             { label: 'Gerer les utilisateurs', route: '/app/users', icon: 'bi-person-gear' },
+            { label: 'Gerer les structures', route: '/app/admin/structures', icon: 'bi-diagram-3' },
             { label: 'Voir les membres', route: '/app/members', icon: 'bi-people' }
           ]
         }
+      },
+      {
+        path: 'admin/structures',
+        component: AdminStructuresComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['ADMIN'] }
       },
       {
         path: 'provincial/dashboard',

@@ -169,6 +169,18 @@ mvn -DskipTests "-Dmaven.compiler.useIncrementalCompilation=false" "-Dmaven.comp
 
 Le dossier de sortie separe a ete utilise car le serveur Spring actif verrouillait certains fichiers dans `target/classes`.
 
+## Collection Postman
+
+Une collection Postman de reference a ete ajoutee :
+
+```text
+docs/postman/CMDA_Management.postman_collection.json
+docs/postman/CMDA_Local.postman_environment.json
+docs/postman/README.md
+```
+
+Elle regroupe les endpoints par domaine metier et contient les nouvelles requetes R7-E3 d'archivage/reactivation.
+
 ## Etat
 
 R7-E3 terminee.

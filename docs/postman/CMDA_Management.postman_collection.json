@@ -1,0 +1,682 @@
+{
+  "info": {
+    "_postman_id": "762be67b-8cd3-4e4a-93ce-48356d893a48",
+    "name": "CMDA Management",
+    "description": "Collection de reference CMDA DEV. Les requetes sont rangees par domaine metier. Utiliser l'environnement CMDA Local et executer AUTHENTICATION / Authenticate avant les requetes protegees.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{jwtToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "AUTHENTICATION",
+      "item": [
+        {
+          "name": "Authenticate",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const response = pm.response.json();",
+                  "const token = response.token || response.jwt || response.accessToken;",
+                  "if (token) {",
+                  "  pm.environment.set('jwtToken', token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{username}}\",\n  \"password\": \"{{password}}\"\n}"
+            },
+            "url": "{{baseUrl}}/api/authenticate",
+            "description": "Authentifie l'utilisateur et stocke automatiquement le token JWT dans l'environnement actif."
+          }
+        }
+      ]
+    },
+    {
+      "name": "USERS",
+      "item": [
+        {
+          "name": "List Users",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/users"
+          }
+        },
+        {
+          "name": "Get User By ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/users/{{userId}}"
+          }
+        },
+        {
+          "name": "List Users By Role",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/users/role/{{role}}"
+          }
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"berger.demo\",\n  \"password\": \"password123\",\n  \"role\": \"BERGER\",\n  \"fraternityId\": {{fraternityId}}\n}"
+            },
+            "url": "{{baseUrl}}/api/users",
+            "description": "MVP : ADMIN peut creer PROVINCIAL, REGIONAL et BERGER. La creation d'un autre ADMIN via l'application est refusee."
+          }
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"berger.demo\",\n  \"password\": \"password123\",\n  \"role\": \"BERGER\",\n  \"fraternityId\": {{fraternityId}}\n}"
+            },
+            "url": "{{baseUrl}}/api/users/{{userId}}"
+          }
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/users/{{userId}}",
+            "description": "Endpoint existant. A utiliser avec prudence : l'archivage logique des utilisateurs reste une evolution a cadrer."
+          }
+        }
+      ]
+    },
+    {
+      "name": "PROVINCES",
+      "item": [
+        {
+          "name": "CRUD METIER",
+          "item": [
+            {
+              "name": "List Active Provinces",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/provinces/all"
+              }
+            },
+            {
+              "name": "Get Province By ID",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/provinces/{{provinceId}}"
+              }
+            },
+            {
+              "name": "Create Province",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Province Demo\",\n  \"description\": \"Province creee depuis Postman\"\n}"
+                },
+                "url": "{{baseUrl}}/provinces/create"
+              }
+            },
+            {
+              "name": "Update Province",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Province Demo\",\n  \"description\": \"Description mise a jour\"\n}"
+                },
+                "url": "{{baseUrl}}/provinces/update/{{provinceId}}"
+              }
+            }
+          ]
+        },
+        {
+          "name": "ARCHIVAGE",
+          "item": [
+            {
+              "name": "List Archived Provinces",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/provinces/archived"
+              }
+            },
+            {
+              "name": "Archive Province",
+              "request": {
+                "method": "PATCH",
+                "url": "{{baseUrl}}/provinces/{{provinceId}}/archive",
+                "description": "Refuse si la province contient encore des regions actives."
+              }
+            },
+            {
+              "name": "Restore Province",
+              "request": {
+                "method": "PATCH",
+                "url": "{{baseUrl}}/provinces/{{provinceId}}/restore"
+              }
+            }
+          ]
+        },
+        {
+          "name": "COMPATIBILITE - SUPPRESSION REFUSEE",
+          "item": [
+            {
+              "name": "Hard Delete Province - Expected Refusal",
+              "request": {
+                "method": "DELETE",
+                "url": "{{baseUrl}}/provinces/delete/{{provinceId}}",
+                "description": "Doit echouer : utiliser l'archivage logique."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "REGIONS",
+      "item": [
+        {
+          "name": "CRUD METIER",
+          "item": [
+            {
+              "name": "List Active Regions",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/regions/all"
+              }
+            },
+            {
+              "name": "List Regions By Province",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/regions/province/{{provinceId}}"
+              }
+            },
+            {
+              "name": "Get Region By ID",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/regions/{{regionId}}"
+              }
+            },
+            {
+              "name": "Create Region",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Region Demo\",\n  \"description\": \"Region creee depuis Postman\",\n  \"provinceId\": {{provinceId}}\n}"
+                },
+                "url": "{{baseUrl}}/regions/create"
+              }
+            },
+            {
+              "name": "Update Region",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Region Demo\",\n  \"description\": \"Description mise a jour\",\n  \"provinceId\": {{provinceId}}\n}"
+                },
+                "url": "{{baseUrl}}/regions/update/{{regionId}}",
+                "description": "Le changement de province est refuse pour le MVP."
+              }
+            }
+          ]
+        },
+        {
+          "name": "ARCHIVAGE",
+          "item": [
+            {
+              "name": "List Archived Regions",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/regions/archived"
+              }
+            },
+            {
+              "name": "Archive Region",
+              "request": {
+                "method": "PATCH",
+                "url": "{{baseUrl}}/regions/{{regionId}}/archive",
+                "description": "Refuse si la region contient encore des fraternites actives."
+              }
+            },
+            {
+              "name": "Restore Region",
+              "request": {
+                "method": "PATCH",
+                "url": "{{baseUrl}}/regions/{{regionId}}/restore",
+                "description": "Refuse si la province parente reste archivee."
+              }
+            }
+          ]
+        },
+        {
+          "name": "COMPATIBILITE - SUPPRESSION REFUSEE",
+          "item": [
+            {
+              "name": "Hard Delete Region - Expected Refusal",
+              "request": {
+                "method": "DELETE",
+                "url": "{{baseUrl}}/regions/delete/{{regionId}}",
+                "description": "Doit echouer : utiliser l'archivage logique."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FRATERNITIES",
+      "item": [
+        {
+          "name": "CRUD METIER",
+          "item": [
+            {
+              "name": "List Active Fraternities",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/fraternities/all"
+              }
+            },
+            {
+              "name": "List Fraternities By Region",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/fraternities/region/{{regionId}}"
+              }
+            },
+            {
+              "name": "Get Fraternity By ID",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/fraternities/{{fraternityId}}"
+              }
+            },
+            {
+              "name": "Create Fraternity",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Fraternite Demo\",\n  \"description\": \"Fraternite creee depuis Postman\",\n  \"regionId\": {{regionId}}\n}"
+                },
+                "url": "{{baseUrl}}/fraternities/create"
+              }
+            },
+            {
+              "name": "Update Fraternity",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Fraternite Demo\",\n  \"description\": \"Description mise a jour\",\n  \"regionId\": {{regionId}}\n}"
+                },
+                "url": "{{baseUrl}}/fraternities/update/{{fraternityId}}",
+                "description": "Le changement de region est refuse pour le MVP."
+              }
+            }
+          ]
+        },
+        {
+          "name": "ARCHIVAGE",
+          "item": [
+            {
+              "name": "List Archived Fraternities",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/fraternities/archived"
+              }
+            },
+            {
+              "name": "Archive Fraternity",
+              "request": {
+                "method": "PATCH",
+                "url": "{{baseUrl}}/fraternities/{{fraternityId}}/archive",
+                "description": "Refuse si la fraternite contient encore des membres actifs ou inactifs."
+              }
+            },
+            {
+              "name": "Restore Fraternity",
+              "request": {
+                "method": "PATCH",
+                "url": "{{baseUrl}}/fraternities/{{fraternityId}}/restore",
+                "description": "Refuse si la region parente reste archivee."
+              }
+            }
+          ]
+        },
+        {
+          "name": "COMPATIBILITE - SUPPRESSION REFUSEE",
+          "item": [
+            {
+              "name": "Hard Delete Fraternity - Expected Refusal",
+              "request": {
+                "method": "DELETE",
+                "url": "{{baseUrl}}/fraternities/delete/{{fraternityId}}",
+                "description": "Doit echouer : utiliser l'archivage logique."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "MEMBERS",
+      "item": [
+        {
+          "name": "CRUD METIER",
+          "item": [
+            {
+              "name": "List Members For Current User",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/members?page=0&size=10"
+              }
+            },
+            {
+              "name": "Get Member By ID",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/members/{{memberId}}"
+              }
+            },
+            {
+              "name": "Create Member",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"Jean\",\n  \"lastName\": \"Demo\",\n  \"email\": \"jean.demo@example.com\",\n  \"phoneNumber\": \"+33123456789\",\n  \"birthday\": \"1990-01-01\",\n  \"profession\": \"Enseignant\",\n  \"status\": \"ACTIVE\",\n  \"fraternityId\": {{fraternityId}}\n}"
+                },
+                "url": "{{baseUrl}}/members/create"
+              }
+            },
+            {
+              "name": "Update Member",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"Jean\",\n  \"lastName\": \"Demo\",\n  \"email\": \"jean.demo@example.com\",\n  \"phoneNumber\": \"+33123456789\",\n  \"birthday\": \"1990-01-01\",\n  \"profession\": \"Enseignant\",\n  \"status\": \"ACTIVE\",\n  \"fraternityId\": {{fraternityId}}\n}"
+                },
+                "url": "{{baseUrl}}/members/update/{{memberId}}"
+              }
+            },
+            {
+              "name": "Archive Member",
+              "request": {
+                "method": "PATCH",
+                "url": "{{baseUrl}}/members/{{memberId}}/archive"
+              }
+            },
+            {
+              "name": "Restore Member",
+              "request": {
+                "method": "PATCH",
+                "url": "{{baseUrl}}/members/{{memberId}}/restore"
+              }
+            },
+            {
+              "name": "Update Status Member",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"INACTIVE\"\n}"
+                },
+                "url": "{{baseUrl}}/members/{{memberId}}/status"
+              }
+            },
+            {
+              "name": "Legacy Delete Member - Archives Member",
+              "request": {
+                "method": "DELETE",
+                "url": "{{baseUrl}}/members/delete/{{memberId}}",
+                "description": "Compatibilite : cet endpoint archive le membre au lieu de le supprimer physiquement."
+              }
+            }
+          ]
+        },
+        {
+          "name": "ADMINISTRATION METIER",
+          "item": [
+            {
+              "name": "List All Active Members For Administration",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/members/all"
+              }
+            },
+            {
+              "name": "List Archived Members",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/members/archived"
+              }
+            },
+            {
+              "name": "List Inactive Members",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/members/inactive"
+              }
+            }
+          ]
+        },
+        {
+          "name": "SEARCH & FILTER",
+          "item": [
+            {
+              "name": "Search Members In Current Scope",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/members/search?keyword=&status=&page=0&size=10"
+              }
+            },
+            {
+              "name": "Filter Members By Fraternity",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/members/fraternity/{{fraternityId}}?firstName=&lastName=&profession=&page=0&size=10"
+              }
+            }
+          ]
+        },
+        {
+          "name": "EXPORT",
+          "item": [
+            {
+              "name": "Export Members CSV",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/members/export/csv?fraternityId={{fraternityId}}"
+              }
+            },
+            {
+              "name": "Export Members Excel",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/members/export/excel?fraternityId={{fraternityId}}"
+              }
+            },
+            {
+              "name": "Export Members PDF",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/members/export/pdf?fraternityId={{fraternityId}}"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CURRENT USER SCOPE",
+      "item": [
+        {
+          "name": "Get Current Scope",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/me/scope"
+          }
+        },
+        {
+          "name": "Get Current Province Regions",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/me/province/regions"
+          }
+        },
+        {
+          "name": "Get Current Region Fraternities",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/me/region/fraternities"
+          }
+        },
+        {
+          "name": "Get Scoped Region Fraternities",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/me/regions/{{regionId}}/fraternities"
+          }
+        },
+        {
+          "name": "Get Current Berger Fraternity",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/me/fraternity"
+          }
+        },
+        {
+          "name": "Get Scoped Fraternity",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/me/fraternities/{{fraternityId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "REFERENCE",
+      "item": [
+        {
+          "name": "Swagger UI",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "url": "{{baseUrl}}/swagger-ui/index.html"
+          }
+        },
+        {
+          "name": "OpenAPI JSON",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "url": "{{baseUrl}}/v3/api-docs"
+          }
+        }
+      ]
+    }
+  ]
+}

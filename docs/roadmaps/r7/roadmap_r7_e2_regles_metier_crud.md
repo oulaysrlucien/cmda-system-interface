@@ -128,7 +128,7 @@ Pour eviter des pertes de donnees, les decisions MVP sont :
 - permettre la reactivation logique d'un membre archive.
 - appliquer des garde-fous lors de l'archivage d'une structure qui contient des enfants.
 
-Ces decisions devront etre implementees et validees dans R7-E3 et R7-E9 pour les structures, puis dans R8 pour les membres.
+Ces decisions devront etre implementees et validees dans R7-E3 et R7-E10 pour les structures, puis dans R8 pour les membres.
 
 ### Responsable apres archivage
 
@@ -156,9 +156,10 @@ Referentiel transverse :
 ## Impact sur les prochaines etapes R7
 
 - R7-E3 doit securiser le CRUD ADMIN et ajouter les garde-fous.
-- R7-E4 doit ajouter les methodes Angular CRUD pour l'ADMIN.
-- R7-E5 doit construire l'ecran ADMIN Structures.
-- R7-E6 et R7-E7 deviennent des etapes de consultation et de navigation perimetree pour Provincial et Regional, sans boutons de creation de structure.
+- R7-E4 doit exposer les endpoints API des structures.
+- R7-E5 doit ajouter les methodes Angular CRUD pour l'ADMIN.
+- R7-E6 doit construire l'ecran ADMIN Structures.
+- R7-E7 et R7-E8 deviennent des etapes de consultation et de navigation perimetree pour Provincial et Regional, sans boutons de creation de structure.
 
 ## Etat
 

@@ -69,7 +69,21 @@ Etat : termine.
 
 Documentation : `roadmap_r7_e3_backend_crud_securise.md`.
 
-### R7-E4 - Services Angular CRUD
+### R7-E4 - Endpoints API des structures
+
+Creer ou completer les routes API des structures.
+
+Livrables :
+
+- endpoints de lecture et CRUD ADMIN.
+- endpoints d'archivage et de reactivation logique.
+- routes harmonisees pour province, region et fraternite.
+
+Etat : termine avec R7-E3.
+
+Documentation : `roadmap_r7_e3_backend_crud_securise.md`.
+
+### R7-E5 - Services Angular des structures
 
 Completer les services front :
 
@@ -84,7 +98,11 @@ Livrables :
 - `archive` et `restore`
 - methodes par perimetre.
 
-### R7-E5 - Ecran ADMIN Structures
+Etat : termine.
+
+Documentation : `roadmap_r7_e5_services_angular_structures.md`.
+
+### R7-E6 - Ecran ADMIN Structures
 
 Ajouter un ecran ADMIN dedie aux structures.
 
@@ -94,7 +112,11 @@ Livrables :
 - actions de creation et modification.
 - navigation vers les espaces existants.
 
-### R7-E6 - Consultation des regions cote Provincial
+Etat : termine.
+
+Documentation : `roadmap_r7_e6_ecran_admin_structures.md`.
+
+### R7-E7 - Consultation des regions cote Provincial
 
 Permettre au Provincial de consulter les regions de sa province sans administrer la structure.
 
@@ -104,7 +126,7 @@ Livrables :
 - acces aux fraternites d'une region.
 - absence de boutons CRUD structures.
 
-### R7-E7 - Consultation des fraternites cote Regional
+### R7-E8 - Consultation des fraternites cote Regional
 
 Permettre au Regional de consulter les fraternites de sa region sans administrer la structure.
 
@@ -114,7 +136,7 @@ Livrables :
 - acces a l'espace fraternite.
 - absence de boutons CRUD structures.
 
-### R7-E8 - Formulaires responsive
+### R7-E9 - Formulaires responsive
 
 Construire les formulaires de creation/modification.
 
@@ -125,7 +147,7 @@ Livrables :
 - formulaire Fraternite avec region rattachee.
 - validation et messages d'erreur.
 
-### R7-E9 - Archivage, reactivation et garde-fous
+### R7-E10 - Archivage, reactivation et garde-fous
 
 Traiter les actions sensibles.
 
@@ -136,7 +158,7 @@ Livrables :
 - reactivation explicite.
 - messages clairs.
 
-### R7-E10 - Tests et documentation
+### R7-E11 - Tests et documentation
 
 Valider les parcours CRUD.
 

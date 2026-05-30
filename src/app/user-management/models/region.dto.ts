@@ -4,6 +4,7 @@ export interface RegionDTO {
   id: number;
   name: string;
   description?: string;
+  archived?: boolean;
   provinceId?: number;
   fraternities?: FraternityDTO[];
 }

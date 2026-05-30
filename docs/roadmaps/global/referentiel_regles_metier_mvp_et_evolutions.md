@@ -150,7 +150,7 @@ Garde-fous implementes en R7-E3 :
 - une fraternite ne peut pas etre archivee tant qu'elle contient des membres non archives.
 - l'application doit demander confirmation et expliquer les impacts avant archivage.
 
-L'ADMIN traite donc les enfants avant le parent. Les confirmations frontend restent a construire en R7-E9.
+L'ADMIN traite donc les enfants avant le parent. Les confirmations frontend restent a construire en R7-E10.
 
 ## 7. Responsable apres archivage d'une structure
 
@@ -301,10 +301,10 @@ Evolutions recommandees :
 
 | Decision | Roadmap cible |
 | --- | --- |
-| Archivage/reactivation logique des structures | R7-E3, R7-E9 |
+| Archivage/reactivation logique des structures | R7-E3, R7-E10 |
 | Doublons interdits par parent | R7-E3 |
-| Responsable detache apres archivage | R7-E3, R7-E9 |
-| Espace ADMIN Structures | R7-E5 |
+| Responsable detache apres archivage | R7-E3, R7-E10 |
+| Espace ADMIN Structures | R7-E6 |
 | Archivage/reactivation logique des membres | R8 |
 | Alertes ADMIN utilisateurs sans perimetre | R9 |
 | Journalisation avancee | R9 ou R10 |
@@ -314,4 +314,4 @@ Evolutions recommandees :
 
 ## Etat
 
-Referentiel metier initial valide. Les garde-fous backend R7-E3 sont implementes ; la suite est R7-E4 cote Angular.
+Referentiel metier initial valide. Les garde-fous backend R7-E3, les services Angular R7-E5 et l'ecran ADMIN Structures R7-E6 sont implementes ; la suite est R7-E7 cote Provincial.

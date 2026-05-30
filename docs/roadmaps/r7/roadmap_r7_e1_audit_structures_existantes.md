@@ -125,7 +125,7 @@ Constat :
 Constat :
 
 - Les services R6 sont principalement orientes lecture.
-- R7-E4 devra ajouter les methodes `create`, `update`, `delete` ou `archive`.
+- R7-E5 devra ajouter les methodes `create`, `update`, `archive` et `restore`.
 
 ### Ecrans Angular
 

@@ -3,6 +3,7 @@
 ## Organisation
 
 - `roadmaps/` : suivi et livrables des roadmaps R0 a R11.
+- `postman/` : collection Postman de reference et environnement local.
 - `screenshots/` : captures de verification visuelle.
 
 Le tableau de suivi principal se trouve dans :

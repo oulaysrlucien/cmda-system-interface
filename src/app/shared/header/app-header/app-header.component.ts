@@ -27,6 +27,10 @@ export class AppHeaderComponent {
       return 'Gestion des utilisateurs';
     }
 
+    if (url.includes('/app/admin/structures')) {
+      return 'Gestion des structures';
+    }
+
     if (url.includes('/app/members')) {
       return 'Gestion des membres';
     }
